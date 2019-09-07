@@ -8,6 +8,8 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
 
+require('dotenv').config();
+
 function App() {
   return (
     <Router>
