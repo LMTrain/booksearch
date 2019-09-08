@@ -6,7 +6,7 @@ import SearchResults from "../components/SearchResults";
 
 class Favorite extends Component {
   state = {
-    results: [],
+    books: [],
     title: "",
     author: "",
     link: "",
@@ -18,12 +18,15 @@ class Favorite extends Component {
   // When the component mounts, get a list of all Favorite books in DB and update this.state.
   componentDidMount() {
     this.loadBooks();    
+    console.log(this.state);
   }
 
   loadBooks = () => {
     API.getBooks()
-      .then(res =>
-        this.setState({ results: res.data.items, title: "", author: "", thumbnail: "" })
+      .then(res => {
+        console.log('LOADBOOKS', res)
+        this.setState({ books: res.data})
+      }
       )
       .catch(err => console.log(err));
   };
@@ -38,7 +41,7 @@ class Favorite extends Component {
     event.preventDefault();
     API.saveBook({
       title: this.state.result.volumeInfo.title,
-      author: this.state.result.volumeInfo.authors,
+      authors: this.state.result.volumeInfo.authors,
       link: this.state.result.volumeInfo.infoLink,
       thumbnail: this.state.result.volumeInfo.imageLinks.thumbnail,
       description: this.state.result.volumeInfo.description,
@@ -57,18 +60,22 @@ class Favorite extends Component {
         <h3 className="text-center">
           List of my favorite books!
         </h3>
-        {this.state.results.map(book => (
+        {this.state.books.map(book => (
              
           <Card             
           id={book._id}
           key={book._id}
           title={book.title}
-          author={book.authors}  
+          authors={book.authors} 
+          link={book.link}          
           thumbnail={book.thumbnail}
-          publisheddate={book.publisheddate}         
+          description={book.description}
+          publisheddate={book.publisheddate}
+          note={book.note}
+          date={book.date}        
           />
         ))}
-        <SearchResults results={this.state.results}
+        <SearchResults books={this.state.books}
           favoriteSubmit={this.favoriteSubmit}
         />         
       </div>

@@ -3,17 +3,27 @@ import API from "../utils/API";
 import Container from "../components/Container";
 import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
+// import { List } from "../components/List";
+// import { Link } from "react-router-dom";
+
 
 class Search extends Component {
   state = {
-    search: "",      
-    results: [],    
+    search: "",
+    id: "",      
+    books: [],    
     error: ""
   };
   
   searchForBooks = query => {
     API.search(query)
-      .then(res => this.setState({ results: res.data.items }))
+      .then(res => this.setState({ books: res.data.items }))
+      .catch(err => console.log(err));
+  }
+
+  searchById = keyId => {
+    API.search(keyId)
+      .then(res => this.setState({ books: res.data.items }))
       .catch(err => console.log(err));
   }
 
@@ -25,9 +35,14 @@ class Search extends Component {
     });
   };
 
+  handleDetailSubmit = event => {
+    event.preventDefault();
+    this.searchById(this.state.id);         
+  };
+
   handleFormSubmit = event => {
     event.preventDefault();
-    this.searchForBooks(this.state.search);      
+    this.searchForBooks(this.state.search);         
   };
 
     
@@ -42,11 +57,14 @@ class Search extends Component {
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}            
           />
-          <SearchResults results={this.state.results}
+          <SearchResults books={this.state.books}
           favoriteSubmit={this.favoriteSubmit}
+          handleFormSubmit={this.handleFormSubmit}
           />
+         
         </Container>
       </div>
+      
     );
   }
 }

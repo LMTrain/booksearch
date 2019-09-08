@@ -8,6 +8,10 @@ export default {
   search: function(query) {
     return axios.get(BASEURL + query + APIKEY);
   },
+  
+  searchId: function(keyId) {
+    return axios.get("https://www.googleapis.com/books/v1/volumes/" + keyId);
+  },
   // Gets all books
   getBooks: function() {
     return axios.get("/api/books");
