@@ -4,6 +4,7 @@ import "./style.css";
 // Using the datalist element we can create autofill suggestions based on the props.breeds array
 function SearchForm(props) {
   return (
+    
     <form className="search">
       <div className="form-group">
         <label htmlFor="search">Book Name:</label>
@@ -19,6 +20,13 @@ function SearchForm(props) {
         <button type="submit" onClick={props.handleFormSubmit} className="btn btn-success">
           Search
         </button>
+      </div>
+      <div>
+        <img
+            alt="Search Page image" width="950" height="400"
+            src="https://lmtrain.github.io/lm-images/assets/images/books2.jpg"
+          />
+      
       </div>
     </form>
   );
