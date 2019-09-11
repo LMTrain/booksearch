@@ -16,8 +16,12 @@ class Search extends Component {
     thumbnail: "",
     description: "",
     publisheddate: "",           
-    error: ""
+    error: "",
+    showBook: [],
+    showBookState: false
   };
+
+
   
   searchForBooks = query => {
     API.search(query)
@@ -50,20 +54,23 @@ class Search extends Component {
     });
   };
 
-  handleDetailsSubmit = (event) => {
-    event.preventDefault();
-    console.log(event.target);
-    const id = event.target.id;
-    console.log('id: ', id);
+  handleDetailsSubmit = (id) => {
+
+  
     // Find the id in the state
-    // const book = this.state.books.find((book) => book.id === id);
-    let booksArray = [...this.state.books]
+    const book = this.state.books.find((book) => book.id === id);
+    console.log('found Book', book)
 
-    let books = booksArray.filter(book => {
-      return book.id === id;
-    });
+    this.setState({showBook: [book], showBookState: true})
 
-    this.setState({ books })
+
+    // let booksArray = [...this.state.books]
+
+    // let books = booksArray.filter(book => {
+    //   return book.id === id;
+    // });
+
+    // this.setState({ books })
     
     // console.log({books});
     
@@ -75,23 +82,55 @@ class Search extends Component {
   };
 
   
-  favoriteSubmit = (event) => {
-    event.preventDefault();
-    console.log(event.target);
-    const id = event.target.id;
-    console.log('id: ', id);
+  favoriteSubmit = (id) => {
+    console.log('id++++', id)
+    // event.preventDefault();
+    // console.log(event.target);
+    // const id = event.target.id;
+    // console.log('id: ', id);
     // Find the id in the state
     // const book = this.state.books.find((book) => book.id === id);
+    // this.setState(book)
     let booksArray = [...this.state.books]
 
     let books = booksArray.filter(book => {
-      return book.id === id;
+       return book.id === id;
     });
-    this.setState({ books })
+    // this.setState({ books })
     
-    this.favoriteBook({ books }) 
+    // // this.favoriteBook({ books }) 
     console.log({ books })
-    // console.log(books.volumeInfo.title)
+    console.log(books[0].volumeInfo.title)
+    console.log(books[0].volumeInfo.authors)
+    console.log(books[0].volumeInfo.infoLink)
+    console.log(books[0].volumeInfo.imageLinks.thumbnail)
+    console.log(books[0].volumeInfo.description)
+    console.log(books[0].volumeInfo.publishedDate)
+    API.saveBook({
+
+      
+    // "bookid" : "kingStePhenks",
+    // "title" : "1922",
+    // "author" : "Stephen King",
+    // "link" : "http://books.google.com/books?id=Dc9cxQEACAAJ&dq=Stephen+King&hl=&source=gbs_api",
+    // "thumbnail" : "http://books.google.com/books/content?id=Dc9cxQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+    // "description" : "A number-one national best seller about a man who wakes up from a five-year coma able to see people's futures and the terrible fate awaiting mankind in The Dead Zone - a \"compulsive page-turner\" (The Atlanta Journal-Constitution). Johnny Smith awakens from a five-year coma after his car accident and discovers that he can see people's futures and pasts when he touches them. Many consider his talent a gift; Johnny feels cursed. His fiancée married another man during his coma, and people clamor for him to solve their problems. When Johnny has a disturbing vision after he shakes the hand of an ambitious and amoral politician, he must decide if he should take drastic action to change the future. The Dead Zone is a \"faultlessly paced...continuously engrossing\" (Los Angeles Times) novel of second sight.",
+    // "publisheddate" : "2019-11-12",
+    // "note" : "This is Stephen King"
+        bookid: books[0].id || "default value",
+        title: books[0].volumeInfo.title || "default value",
+        author: books[0].volumeInfo.authors || "default value",
+        link: books[0].volumeInfo.infoLink || "default value",
+        thumbnail: books[0].volumeInfo.imageLinks.thumbnail || "default value",
+        description: books[0].volumeInfo.description || "default value",
+        publisheddate: books[0].volumeInfo.publishedDate || "default value",
+      })
+        .then(res => {console.log(res)})
+        .catch(err => console.log(err));
+  
+
+   
+    
   };
 
 
@@ -100,8 +139,8 @@ class Search extends Component {
     
   
 
-  favoriteBook = event => {
-    console.log(this.state.books)
+  // favoriteBook = event => {
+  //   console.log(this.state.books)
     // API.saveBook({
     //   bookid: this.state.books.id,
     //   title: this.state.books.title,
@@ -114,9 +153,13 @@ class Search extends Component {
     //   .then(res => this.bookSaved())
     //   .catch(err => console.log(err));
 
-  }
+  // }
  
   render() {
+    console.log('this.state.showBook', this.state.showBook)
+
+    const {showBookState, showBook} = this.state
+
     return (
       <div>
         <Container style={{ minHeight: "80%" }}>
@@ -127,15 +170,16 @@ class Search extends Component {
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}            
           />
-          <SearchResults books={this.state.books}
+          {!showBookState ? <SearchResults books={this.state.books}
           favoriteSubmit={this.favoriteSubmit}
           // handleFormSubmit={this.handleFormSubmit}
           handleDetailsSubmit={this.handleDetailsSubmit}
-          />
-          <Details books={this.state.books}
-          favoriteSubmit={this.favoriteSubmit}
+          /> : <Details showBook={showBook}/>}
+          {/* <Details books={this.state.books}
+          showDetail={this.state.showDetail}
+          // favoriteSubmit={this.favoriteSubmit}
           // handleDetailsSubmit={this.handleDetailsSubmit}
-          />
+          /> */}
          
         </Container>
       </div>
