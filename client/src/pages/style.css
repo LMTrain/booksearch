@@ -20,10 +20,11 @@ ul.search-results img {
 }
 .card > .img-container > img {
   width: 70%;
-  padding-top: 2rem;
+  padding-top: 1rem;
 }
 
 .card > .content {
+  padding-top: -4rem;
   padding-left: -2rem;
   padding-right: -2rem;
   font-size: 15px;
