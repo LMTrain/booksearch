@@ -33,7 +33,7 @@ class Favorite extends Component {
 
   addNote = (id) => {
     const book = this.state.book.find((book) => book.id === id);
-    console.log('fav Book', book)
+    // console.log('fav Book', book)
     this.setState({ book })
     let bookNote = String(this.state.book.note)
     API.updateBook({

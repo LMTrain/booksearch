@@ -5,7 +5,7 @@ import "./style.css";
 
 function SearchResults(props) {
 
-  console.log('props', props)
+  // console.log('props', props)
   
   return (
              
