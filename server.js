@@ -4,6 +4,16 @@ const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+io.on('connection', client => {
+  client.on('event', data => { /* … */ });
+  client.on('disconnect', () => { /* … */ });
+  socket.emit('request', /* … */); // emit an event to the socket
+  io.emit('broadcast', /* … */); // emit an event to all connected sockets
+  socket.on('reply', () => { /* … */ }); // listen to the event
+});
+// server.listen(3000);
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));

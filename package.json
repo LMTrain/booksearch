@@ -25,6 +25,7 @@
     "express": "^4.17.1",
     "if-env": "^1.0.4",
     "mongoose": "^5.3.16",
-    "react-modal": "^3.10.1"
+    "react-modal": "^3.10.1",
+    "socket.io": "^2.2.0"
   }
 }
