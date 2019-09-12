@@ -8,6 +8,7 @@ import Details from "../components/Details";
 class Search extends Component {
   state = {
     search: "",
+    favMessage:"",
     id: "",      
     books: [],    
     title: "",
@@ -38,10 +39,10 @@ class Search extends Component {
   handleDetailsSubmit = (id) => {  
     // Find the id in the state
     const book = this.state.books.find((book) => book.id === id);
-    console.log('found Book', book)
+    // console.log('found Book', book)
     this.setState({showBook: [book], showBookState: true})
         
-  }
+  }  
 
   handleFormSubmit = event => {
     event.preventDefault();
@@ -51,7 +52,7 @@ class Search extends Component {
   favoriteSubmit = (id) => {
     
     const book = this.state.books.find((book) => book.id === id);
-    console.log('fav Book', book)
+    // console.log('fav Book', book)
     this.setState({showBook: [book], showBookState: false})
     let bookId = String(book.id)    
     let bookTitle = String(book.volumeInfo.title)    
@@ -59,7 +60,9 @@ class Search extends Component {
     let bookLink = String(book.volumeInfo.infoLink)
     let bookThumbnail = String(book.volumeInfo.imageLinks.thumbnail)
     let bookDescription = String(book.volumeInfo.description)
+    let bookNote = ""
     let bookDate = String(book.volumeInfo.publishedDate)
+    this.state.favMessage = "Book saved successfully";
     
 
     API.saveBook({
@@ -70,19 +73,17 @@ class Search extends Component {
       link: bookLink,
       thumbnail: bookThumbnail,
       description: bookDescription,
+      note: bookNote,
       publisheddate: bookDate,
     })
       .then(res => {console.log(res)})
-      .catch(err => console.log(err));
-  
-
-   
+      .catch(err => console.log(err));  
     
   };
 
  
   render() {
-    console.log('this.state.showBook', this.state.showBook)
+    // console.log('this.state.showBook', this.state.showBook)
 
     const {showBookState, showBook} = this.state
 
@@ -97,15 +98,11 @@ class Search extends Component {
             handleInputChange={this.handleInputChange}            
           />
           {!showBookState ? <SearchResults books={this.state.books}
-          favoriteSubmit={this.favoriteSubmit}
-          // handleFormSubmit={this.handleFormSubmit}
+          favoriteSubmit={this.favoriteSubmit}         
           handleDetailsSubmit={this.handleDetailsSubmit}
-          /> : <Details showBook={showBook}/>}
-          {/* <Details books={this.state.books}
-          showDetail={this.state.showDetail}
-          // favoriteSubmit={this.favoriteSubmit}
-          // handleDetailsSubmit={this.handleDetailsSubmit}
-          /> */}
+          favMessage={this.state.favMessage}
+          
+          /> : <Details showBook={showBook}/>}       
          
         </Container>
       </div>

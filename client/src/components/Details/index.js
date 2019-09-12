@@ -19,7 +19,7 @@ function Details(props) {
           
  
             
-          <span><button id={favBook.id} type="submit" onClick={props.favoriteSubmit} className="btn btn-success">Add to Favorite</button></span>
+          <span><a href = "/search/"><button type="submit" className="btn btn-success">Back To Search</button></a></span>
                             
                  
          

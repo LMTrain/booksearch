@@ -7,9 +7,8 @@ import API from "../utils/API";
 
 class Favorite extends Component {
   state = {
-    book: [],
-    showBook: [],
-    showBookState: false  
+    book: {},
+   
   };
 
   // When the component mounts, get a list of all Favorite books in DB and update this.state.
@@ -27,11 +26,22 @@ class Favorite extends Component {
       .catch(err => console.log(err));
   };
 
-  favBookDetails = (id) => {
-    const favbook = this.state.book.find((favbook) => book._id === _id);
-    console.log('fav Book', favbook)
-    this.setState({showBook: [book], showBookState: false})
-  }
+  handleNoteSubmit = event => {
+    event.preventDefault();
+    this.addNote(this.state.book.note);         
+  };
+
+  addNote = (id) => {
+    const book = this.state.book.find((book) => book.id === id);
+    console.log('fav Book', book)
+    this.setState({ book })
+    let bookNote = String(this.state.book.note)
+    API.updateBook({
+      note: bookNote,      
+    })
+      .then(res => {console.log(res)})
+      .catch(err => console.log(err)); 
+  };
 
   
   deleteBook = id => {
@@ -45,18 +55,23 @@ class Favorite extends Component {
     
     return (
       <div>
-        <h1 className="text-center">Favorite Books</h1>
-        {!showBookState ? <Favorite book={this.state.book}
-          favBookDetails={this.favBookDetails}
-          // handleFormSubmit={this.handleFormSubmit}
-          favBookDetails={this.favBookDetails}
-          /> : <Favorite showBook={showBook}/>}
+        <h1 className="text-center">My Favorite Books</h1>        
         <div>
           
           {this.state.book.length ? (
                 <List>
                   {this.state.book.map(book => (
                     <ListItem>
+                      <span>
+                          <form className="note">
+                            <div className="form-group">
+                              <label htmlFor="note">Note:</label>
+                              <input value={this.state.book.note} name="note" type="text" className="form-control" placeholder="Add a note " id="note"
+                              />        
+                              <button id={book._id}type="submit" onClick={() => this.handleNoteSubmit(book._id)} className="btn btn-success">Add Note</button>
+                            </div>      
+                          </form>
+                        </span>
                       <div className="card">
                         <div className="img-container">
                         <img
@@ -77,9 +92,9 @@ class Favorite extends Component {
                             </li>
                           </ul>
                         </div>
+                        
                       </div> 
-                      <span><button id={book._id}type="submit" onClick={() => this.deleteBook(book._id)} className="btn btn-success">Delete</button></span><span>  </span>
-                      <span><button id={book._id}type="submit" onClick={() => this.favBookDetails(book._id)} className="btn btn-success">Detail</button></span><span>  </span>
+                      <span><button id={book._id}type="submit" onClick={() => this.deleteBook(book._id)} className="btn btn-success">Remove</button></span>
                     </ListItem>
                   ))}
                 </List>
@@ -94,3 +109,8 @@ class Favorite extends Component {
 }
 
 export default Favorite;
+
+
+
+
+

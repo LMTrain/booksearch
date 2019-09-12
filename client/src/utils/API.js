@@ -20,6 +20,10 @@ export default {
   getBook: function(id) {
     return axios.get("/api/books/" + id);
   },
+  // Update the book with the given id
+    updateBook: function(id) {
+    return axios.put("/api/books/" + id);
+  },
   // Deletes the book with the given id
   deleteBook: function(id) {
     return axios.delete("/api/books/" + id);

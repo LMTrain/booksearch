@@ -19,9 +19,11 @@ function SearchResults(props) {
             <span><button id={result.id}type="submit" onClick={() => props.handleDetailsSubmit(result.id)} className="btn btn-success">Detail</button></span><span>  </span>
             
             
+            
    
               
-            <span><button id={result.id} type="submit" onClick={() => props.favoriteSubmit(result.id)} className="btn btn-success">Add to Favorite</button></span>
+            <span><button id={result.id} type="submit" onClick={() => props.favoriteSubmit(result.id)} className="btn btn-success">Add to Favorite</button></span><span>  </span>
+            <span id="favMessage"></span>
                               
                    
            
