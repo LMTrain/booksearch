@@ -20,7 +20,7 @@ class Favorite extends Component {
   loadBooks = () => {
     API.getBooks()
       .then(res => {        
-        this.setState({ book: res.data, id: "", title: "", author: "", link: "", thumbnail: "", description: "", publisheddate: "", note: "",})
+        this.setState({ book: res.data, id: "", title: "", authors: "", link: "", thumbnail: "", description: "", publisheddate: "", note: "",})
       }
       )
       .catch(err => console.log(err));
@@ -85,7 +85,7 @@ class Favorite extends Component {
                               <b>Title :</b> {book.title}
                             </li>
                             <li>
-                              <b>Authors :</b>{book.author}
+                              <b>Authors :</b>{book.authors}
                             </li>
                             <li>
                               <b>Published Date :</b> {book.publishedDate}<span>||</span><span><b>Preview :</b> <a href={book.link} target="_blank" rel="noopener noreferrer">Link</a></span>

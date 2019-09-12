@@ -24,7 +24,7 @@ function Details(props) {
                  
          
           <p><b>Title             :</b> {favBook.volumeInfo.title}</p>
-          <span><b>Author         :</b> {favBook.volumeInfo.authors} | |</span>
+          <span><b>Authors         :</b> {favBook.volumeInfo.authors} | |</span>
           <p><b>Published Date :</b> {favBook.volumeInfo.publishedDate}</p>
           <p><b>Description :</b> {favBook.volumeInfo.description}</p>
           

@@ -12,7 +12,7 @@ class Search extends Component {
     id: "",      
     books: [],    
     title: "",
-    author: "",
+    authors: "",
     link: "",
     thumbnail: "",
     description: "",
@@ -56,7 +56,7 @@ class Search extends Component {
     this.setState({showBook: [book], showBookState: false})
     let bookId = String(book.id)    
     let bookTitle = String(book.volumeInfo.title)    
-    let bookAuthor = String(book.volumeInfo.authors)
+    let bookAuthors = String(book.volumeInfo.authors)
     let bookLink = String(book.volumeInfo.infoLink)
     let bookThumbnail = String(book.volumeInfo.imageLinks.thumbnail)
     let bookDescription = String(book.volumeInfo.description)
@@ -69,7 +69,7 @@ class Search extends Component {
 
       bookid: bookId,
       title: bookTitle,
-      author: bookAuthor,
+      authors: bookAuthors,
       link: bookLink,
       thumbnail: bookThumbnail,
       description: bookDescription,

@@ -5,14 +5,14 @@ const db = require("../models");
 
 mongoose.connect(
   process.env.MONGODB_URI ||
-  "mongodb://localhost/favbooks"
+  "mongodb://localhost/googlebooks"
 );
 
 const bookSeed = [
   {
     bookid: "kingStePhenks",
     title: "1922",
-    author: "Stephen King",
+    authors: "Stephen King",
     link: "http://books.google.com/books?id=Dc9cxQEACAAJ&dq=Stephen+King&hl=&source=gbs_api",
     thumbnail: "http://books.google.com/books/content?id=Dc9cxQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
     description:
@@ -24,7 +24,7 @@ const bookSeed = [
   {
     id: "tornCindytc",
     title: "Lord of the Flies",
-    author: "Cindy Torn",
+    authors: "Cindy Torn",
     link: "http://books.google.com/books?id=zvm_wwEACAAJ&dq=lord+of+the+flies&hl=&source=gbs_api",
     thumbnail: "http://books.google.com/books/content?id=zvm_wwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
     description:
@@ -36,7 +36,7 @@ const bookSeed = [
   {
     id: "salingerJDsjd",
     title: "The Catcher in the Rye",
-    author: "J.D. Salinger",
+    authors: "J.D. Salinger",
     link: "http://books.google.com/books?id=Dc9cxQEACAAJ&dq=Stephen+King&hl=&source=gbs_api",
     thumbnail: "http://books.google.com/books/content?id=Dc9cxQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
     description:
@@ -48,7 +48,7 @@ const bookSeed = [
   {
     id: "noahTrevornt",
     title: "Born a Crime: Stories from a South African Childhood",
-    author: "Trevor Noah",
+    authors: "Trevor Noah",
     link: "http://books.google.com/books?id=Dc9cxQEACAAJ&dq=Stephen+King&hl=&source=gbs_api",
     thumbnail: "http://books.google.com/books/content?id=Dc9cxQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
     description:

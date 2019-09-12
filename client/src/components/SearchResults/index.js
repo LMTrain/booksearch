@@ -28,7 +28,7 @@ function SearchResults(props) {
                    
            
             <p><b>Title             :</b> {result.volumeInfo.title}</p>
-            <span><b>Author         :</b> {result.volumeInfo.authors} | |</span>
+            <span><b>Authors         :</b> {result.volumeInfo.authors} | |</span>
             <span><b>Published Date :</b> {result.volumeInfo.publishedDate}</span>
             
           </li>          
