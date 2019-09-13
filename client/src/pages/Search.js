@@ -62,7 +62,7 @@ class Search extends Component {
     let bookDescription = String(book.volumeInfo.description)
     let bookNote = ""
     let bookDate = String(book.volumeInfo.publishedDate)
-    this.state.favMessage = "Book saved successfully";
+    // this.state.favMessage = "Book saved successfully";
     
 
     API.saveBook({
