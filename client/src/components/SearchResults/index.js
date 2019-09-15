@@ -10,7 +10,7 @@ function SearchResults(props) {
   return (
              
     <div>
-      <ul key={props.books.id} className="list-group search-results">
+      <ul className="list-group search-results">
         {props.books.map(result => (   
                  
           <li key={result.id} className="list-group-item">
