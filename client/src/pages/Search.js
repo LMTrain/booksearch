@@ -62,7 +62,7 @@ class Search extends Component {
     let bookDescription = String(book.volumeInfo.description)
     let bookNote = ""
     let bookDate = String(book.volumeInfo.publishedDate)
-    // this.state.favMessage = "Book saved successfully";
+    
     
 
     API.saveBook({
@@ -89,7 +89,7 @@ class Search extends Component {
 
     return (
       <div>
-        <Container style={{ minHeight: "80%" }}>
+        <Container key={this.state.books.id} style={{ minHeight: "80%" }}>
           <h1 className="text-center">Search For Books</h1>
           
           <SearchForm
@@ -100,7 +100,7 @@ class Search extends Component {
           {!showBookState ? <SearchResults books={this.state.books}
           favoriteSubmit={this.favoriteSubmit}         
           handleDetailsSubmit={this.handleDetailsSubmit}
-          favMessage={this.state.favMessage}
+          
           
           /> : <Details showBook={showBook}/>}       
          

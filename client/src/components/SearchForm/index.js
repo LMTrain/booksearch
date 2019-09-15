@@ -23,7 +23,7 @@ function SearchForm(props) {
       </div>
       <div>
         <img
-            alt="Search Page image" width="950" height="400"
+            alt="" width="950" height="400"
             src="https://lmtrain.github.io/lm-images/assets/images/books2.jpg"
           />
       

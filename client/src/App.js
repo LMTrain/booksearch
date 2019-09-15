@@ -18,8 +18,7 @@ function App() {
         <Wrapper>
           <Route exact path="/" component={About} />
           <Route exact path="/about" component={About} />
-          <Route exact path="/Favorite" component={Favorite} />
-          {/* <Route exact path="/Details" component={Details} /> */}
+          <Route exact path="/Favorite" component={Favorite} />      
           <Route exact path="/search" component={Search} />
                   
         </Wrapper>

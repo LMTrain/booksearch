@@ -12,7 +12,7 @@ class Favorite extends Component {
   };
 
   // When the component mounts, get a list of all Favorite books in DB and update this.state.
-  componentDidMount() {  
+  componentWillMount() {  
     this.loadBooks();    
     
   }
@@ -32,7 +32,7 @@ class Favorite extends Component {
   };
 
   addNote = (id) => {
-    const book = this.state.book.find((book) => book.id === id);
+    const book = this.state.book.find((book) => book._id === id);
     // console.log('fav Book', book)
     this.setState({ book })
     let bookNote = String(this.state.book.note)
@@ -61,14 +61,14 @@ class Favorite extends Component {
           {this.state.book.length ? (
                 <List>
                   {this.state.book.map(book => (
-                    <ListItem>
+                    <ListItem key={book._id}>
                       <span>
                           <form className="note">
                             <div className="form-group">
                               <label htmlFor="note">Note:</label>
                               <input value={this.state.book.note} name="note" type="text" className="form-control" placeholder="Add a note " id="note"
                               />        
-                              <button id={book._id}type="submit" onClick={() => this.handleNoteSubmit(book._id)} className="btn btn-success">Add Note</button>
+                              <button key={book._id} type="submit" onClick={() => this.handleNoteSubmit(book._id)} className="btn btn-success">Add Note</button>
                             </div>      
                           </form>
                         </span>
@@ -94,7 +94,7 @@ class Favorite extends Component {
                         </div>
                         
                       </div> 
-                      <span><button id={book._id}type="submit" onClick={() => this.deleteBook(book._id)} className="btn btn-success">Remove</button></span>
+                      <span><button key={book._id} type="submit" onClick={() => this.deleteBook(book._id)} className="btn btn-success">Remove</button></span>
                     </ListItem>
                   ))}
                 </List>
