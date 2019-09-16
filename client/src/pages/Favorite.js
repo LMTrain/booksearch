@@ -10,7 +10,7 @@ class Favorite extends Component {
     book: {},
    
   };
-
+//HERE IS JUST TO TYPE FOR GITHUB
   // When the component mounts, get a list of all Favorite books in DB and update this.state.
   componentWillMount() {  
     this.loadBooks();    
