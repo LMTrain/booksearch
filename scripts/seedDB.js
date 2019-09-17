@@ -8,8 +8,6 @@ mongoose.connect(
   "mongodb://localhost/googlebooks"
 );
 
-mongoose.connect(MONGODB_URI);
-
 const bookSeed = [
   {
     bookid: "kingStePhenks",
