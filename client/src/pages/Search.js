@@ -52,7 +52,7 @@ class Search extends Component {
   favoriteSubmit = (id) => {
     
     const book = this.state.books.find((book) => book.id === id);
-    // console.log('fav Book', book)
+    console.log('fav Book', book)
     this.setState({showBook: [book], showBookState: false})
     let bookId = String(book.id)    
     let bookTitle = String(book.volumeInfo.title)    
@@ -97,7 +97,7 @@ class Search extends Component {
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}            
           />
-          {!showBookState ? <SearchResults books={this.state.books}
+          {!showBookState ? <SearchResults books={this.state.books == undefined ? [] : this.state.books}
           favoriteSubmit={this.favoriteSubmit}         
           handleDetailsSubmit={this.handleDetailsSubmit}
           
