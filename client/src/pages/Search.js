@@ -5,6 +5,7 @@ import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
 import Details from "../components/Details";
 
+
 class Search extends Component {
   state = {
     search: "",
@@ -24,7 +25,7 @@ class Search extends Component {
   
   searchForBooks = query => {
     API.search(query)
-      .then(res => this.setState({ books: res.data.items }))     
+      .then(res => this.setState({ books: res.data.items }))         
       .catch(err => console.log(err));
   }  
 
@@ -46,7 +47,8 @@ class Search extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    this.searchForBooks(this.state.search);         
+    this.searchForBooks(this.state.search);
+    console.log(this.state.search);        
   };
   
   favoriteSubmit = (id) => {
@@ -97,7 +99,7 @@ class Search extends Component {
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}            
           />
-          {!showBookState ? <SearchResults books={this.state.books == undefined ? [] : this.state.books}
+          {!showBookState ? <SearchResults books={this.state.books === undefined ? [] : this.state.books}
           favoriteSubmit={this.favoriteSubmit}         
           handleDetailsSubmit={this.handleDetailsSubmit}
           
