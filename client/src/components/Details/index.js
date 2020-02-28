@@ -3,8 +3,7 @@ import "./style.css";
 
 
 
-function Details(props) {
-  // console.log('THIS ARE PROPS FROM DETAIL', props)
+function Details(props) { 
 
   return (
    

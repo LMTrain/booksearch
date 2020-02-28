@@ -12,7 +12,8 @@
   padding: 3px;
   background: rgb(56, 55, 55);
   color: whitesmoke;
-  height: 50px;
+  height: 20px;
   font-weight: bold;
   text-align: center;
+  font-size: small;
 }

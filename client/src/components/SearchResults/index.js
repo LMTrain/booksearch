@@ -3,10 +3,7 @@ import "./style.css";
 
 
 
-function SearchResults(props) {
-
-  // console.log('THIS ARE PROPS FROM SEARCH RESULT', props)
-  
+function SearchResults(props) {  
   return (
              
     <div className="result-box">

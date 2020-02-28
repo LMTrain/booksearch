@@ -60,3 +60,11 @@ ul.search-results img {
   font-size: small;  
 }
 
+.detail-card {
+  margin-left: -50px;
+  margin-top: 1px;
+}
+ul ul {
+  list-style-type: none;
+}
+

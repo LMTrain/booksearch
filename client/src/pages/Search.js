@@ -47,14 +47,12 @@ class Search extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    this.searchForBooks(this.state.search);
-    console.log(this.state.search);        
+    this.searchForBooks(this.state.search);      
   };
   
   favoriteSubmit = (id) => {
     
-    const book = this.state.books.find((book) => book.id === id);
-    console.log('fav Book', book)
+    const book = this.state.books.find((book) => book.id === id);   
     this.setState({showBook: [book], showBookState: false})
     let bookId = String(book.id)    
     let bookTitle = String(book.volumeInfo.title)    
@@ -86,7 +84,6 @@ class Search extends Component {
  
   render() {
     // console.log('this.state.showBook', this.state.showBook)
-
     const {showBookState, showBook} = this.state
 
     return (

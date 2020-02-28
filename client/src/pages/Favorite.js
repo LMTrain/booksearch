@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "./style.css";
 import API from "../utils/API";
+import Container from "../components/Container";
+import Row from "../components/Row";
+import Col from "../components/Col";
 
 
 
@@ -70,30 +73,45 @@ class Favorite extends Component {
                             </div>      
                           </form>
                         </span>
-                      <div className="card">
-                        <div className="img-container">
-                        <img
-                          alt={book.title} width="150" height="250"
-                          src={book.thumbnail}
-                        />
-                        </div>
-                        <div className="content">
-                          <ul>
-                            <li>
-                              <b>Title :</b> {book.title}
-                            </li>
-                            <li>
-                              <b>Authors :</b>{book.authors}
-                            </li>
-                            <li>
-                              <b>Published Date :</b> {book.publisheddate}
-                              {/* <span>||</span><span><b>Preview :</b> <a href={book.link} target="_blank" rel="noopener noreferrer">Link</a></span> */}
-                            </li>
-                          </ul>
-                        </div>
-                        
-                      </div> 
-                      <span><button key={book._id} type="submit" onClick={() => this.deleteBook(book._id)} className="btn btn-success">Remove</button></span>
+                      <Row>
+                        <Col size="md-4">
+                          <div className="card">
+                            <div className="img-container">
+                            <img
+                              alt={book.title} width="150" height="250"
+                              src={book.thumbnail}
+                            />
+                            </div>
+                            <div className="content">
+                              <ul>
+                                <li>
+                                  <b>Title :</b> {book.title}
+                                </li>
+                                <li>
+                                  <b>Authors :</b>{book.authors}
+                                </li>
+                                <li>
+                                  <b>Published Date :</b> {book.publisheddate}
+                                  {/* <span>||</span><span><b>Preview :</b> <a href={book.link} target="_blank" rel="noopener noreferrer">Link</a></span> */}
+                                </li>
+                              </ul>
+                            </div>                        
+                          </div> 
+                          <span><button key={book._id} type="submit" onClick={() => this.deleteBook(book._id)} className="btn btn-success">Remove</button></span>
+                        </Col>
+                        <Col size="md-8">
+                          <div className="detail-card">                            
+                            <div className="content">
+                              <ul>                                
+                                <li>
+                                  <b>Details :</b> {book.description}                                  
+                                </li>
+                              </ul>
+                            </div>                        
+                          </div> 
+                        </Col>
+                      </Row>
+                      
                     </li>
                   ))}
                 </ul>
