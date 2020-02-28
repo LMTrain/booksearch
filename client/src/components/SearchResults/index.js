@@ -5,16 +5,16 @@ import "./style.css";
 
 function SearchResults(props) {
 
-  // console.log('props', props)
+  // console.log('THIS ARE PROPS FROM SEARCH RESULT', props)
   
   return (
              
-    <div>
+    <div className="result-box">
       <ul className="list-group search-results">
         {props.books.map(result => (   
                  
           <li key={result.etag} className="list-group-item">
-            <img alt={result.volumeInfo.title} width="200" height="220" className="img-fluid" src={result.volumeInfo.imageLinks == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : result.volumeInfo.imageLinks.thumbnail} /><span>     </span>
+            <img alt={result.volumeInfo.title} width="180" height="200" className="img-fluid" src={result.volumeInfo.imageLinks == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : result.volumeInfo.imageLinks.thumbnail} /><span>     </span>
             
             <span><button id={result.etag}type="submit" onClick={() => props.handleDetailsSubmit(result.id)} className="btn btn-success">Detail</button></span><span>  </span>   
               

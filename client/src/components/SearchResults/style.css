@@ -1,3 +1,29 @@
 ul.search-results img {
   margin: 0 auto;
 }
+
+.list-group-item {
+  position: relative;  
+  background-color: transparent;
+  width: 950px;
+  border-radius: .95rem;
+  font-size: small;
+}
+
+.result-box {
+  padding-top: 23px;
+}
+
+.btn-success {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+  border-radius: .95rem;
+  box-shadow: 0 2px 2px #999, 0 2px 2px #999;
+  margin-left: 5px;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}

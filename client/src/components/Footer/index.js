@@ -4,7 +4,7 @@ import "./style.css";
 function Footer() {
   return (
     <footer className="footer">
-      <span>LM 2019</span>
+      <span>Copyright &copy; LM Systems LLC 2019</span>
     </footer>
   );
 }

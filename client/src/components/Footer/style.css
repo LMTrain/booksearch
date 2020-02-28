@@ -1,5 +1,5 @@
 .footer {
-  min-height: 100px;
+  /* height: 10px; */
   background: rgb(95, 95, 95);
   position: relative;
 }
@@ -12,5 +12,7 @@
   padding: 3px;
   background: rgb(56, 55, 55);
   color: whitesmoke;
+  height: 50px;
   font-weight: bold;
+  text-align: center;
 }

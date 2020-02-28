@@ -92,7 +92,7 @@ class Search extends Component {
     return (
       <div>
         <Container style={{ minHeight: "80%" }}>
-          <h1 className="text-center">Search For Books</h1>
+          <h3 className="text-center">Search For Books</h3>
           
           <SearchForm
             search={this.state.search}

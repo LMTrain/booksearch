@@ -4,19 +4,22 @@ ul.search-results img {
 .card {
   background: #fff;
   border-radius: 2px;
-  height: 400px;
-  margin: 1rem;
+  height: 350px;
+  /* margin: 1rem; */
   position: relative;
   width: 270px;
-  box-shadow: 0 3px 6px #6f6666, 0 3px 6px #6f6666;
+  box-shadow: 0 5px 8px #6f6666, 0 5px 8px #6f6666;
   text-align: left;
+  border-radius: .95rem;
+  margin-bottom: 15px;
 }
 
 .card > .img-container {
   height: 70%;
   overflow: hidden;
   text-align: center;
-  background:#343a40;
+  background: white;
+  border-radius: .95rem;
 }
 .card > .img-container > img {
   width: 70%;
@@ -24,16 +27,36 @@ ul.search-results img {
 }
 
 .card > .content {
-  padding-top: -4rem;
+  padding-top: 0px;
   padding-left: -2rem;
   padding-right: -2rem;
   font-size: 15px;
+  
 }
 
 .card > .content > ul {
   list-style-type: none;
+  margin-left: 0px;
 }
 
 .card > .content > ul > li {
-  margin-top: 18px;
+  margin-top: 8px;
+  margin-bottom: 0;
+  margin-top: 0px;
+  padding-top: 2px;
+  padding-bottom: 0px;
 }
+
+.h3, h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.list-group-item {
+  position: relative;  
+  background-color: transparent;
+  width: 950px;
+  border-radius: .95rem;
+  font-size: small;  
+}
+

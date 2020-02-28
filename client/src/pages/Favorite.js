@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { List, ListItem } from "../components/List";
 import "./style.css";
 import API from "../utils/API";
 
@@ -51,23 +50,22 @@ class Favorite extends Component {
   };
   
 
-  render() {
-    
+  render() {    
     return (
       <div>
-        <h1 className="text-center">My Favorite Books</h1>        
-        <div>
+        <h3 className="text-center">My Favorite Books</h3>        
+        <div className="result-box">
           
           {this.state.book.length ? (
-                <List>
+                <ul className="list-group search-results">
                   {this.state.book.map(book => (
-                    <ListItem key={book._id}>
+                    <li key={book._id} className="list-group-item">
                       <span>
                           <form className="note">
                             <div className="form-group">
-                              <label htmlFor="note">Note:</label>
+                              <label htmlFor="note"></label>
                               <input value={this.state.book.note} name="note" type="text" className="form-control" placeholder="Add a note " id="note"
-                              />        
+                              />       
                               <button key={book._id} type="submit" onClick={() => this.handleNoteSubmit(book._id)} className="btn btn-success">Add Note</button>
                             </div>      
                           </form>
@@ -88,16 +86,17 @@ class Favorite extends Component {
                               <b>Authors :</b>{book.authors}
                             </li>
                             <li>
-                              <b>Published Date :</b> {book.publishedDate}<span>||</span><span><b>Preview :</b> <a href={book.link} target="_blank" rel="noopener noreferrer">Link</a></span>
+                              <b>Published Date :</b> {book.publisheddate}
+                              {/* <span>||</span><span><b>Preview :</b> <a href={book.link} target="_blank" rel="noopener noreferrer">Link</a></span> */}
                             </li>
                           </ul>
                         </div>
                         
                       </div> 
                       <span><button key={book._id} type="submit" onClick={() => this.deleteBook(book._id)} className="btn btn-success">Remove</button></span>
-                    </ListItem>
+                    </li>
                   ))}
-                </List>
+                </ul>
               ) : (
                 <h4>...Loading</h4>
               )}
