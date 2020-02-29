@@ -3,7 +3,9 @@ import "./style.css";
 
 
 
-function SearchResults(props) {  
+function SearchResults(props) {
+  
+  console.log("SEARCH RESULTS", props)
   return (
              
     <div className="result-box">

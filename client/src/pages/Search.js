@@ -51,22 +51,54 @@ class Search extends Component {
   };
   
   favoriteSubmit = (id) => {
-    
+    // var bookThumbnail =" "
     const book = this.state.books.find((book) => book.id === id);   
     this.setState({showBook: [book], showBookState: false})
+    console.log("FAV BOOK", book)
+    console.log("IMAGE URL", book.volumeInfo.imageLinks)
+
+     if (book.volumeInfo.imageLinks === undefined) {
+      var bookThumbnail = 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg'
+    } else {
+      bookThumbnail = String(book.volumeInfo.imageLinks.thumbnail)
+    }
+
+    if (book.volumeInfo.description === undefined) {
+      var bookDescription = 'This book does not include a brief summary'
+    } else {
+      bookDescription = String(book.volumeInfo.description)
+    }
+
+    if (book.volumeInfo.publishedDate === undefined) {
+      var bookDate = '2020'
+    } else {
+      bookDate = String(book.volumeInfo.publishedDate)
+    }
+
     let bookId = String(book.id)    
     let bookTitle = String(book.volumeInfo.title)    
     let bookAuthors = String(book.volumeInfo.authors)
     let bookLink = String(book.volumeInfo.infoLink)
-    let bookThumbnail = String(book.volumeInfo.imageLinks.thumbnail)
-    let bookDescription = String(book.volumeInfo.description)
     let bookNote = ""
-    let bookDate = String(book.volumeInfo.publishedDate)
+  
+
+    function truncateString(str, num) {    
+      if (str.length > num && num > 3) {
+              return str.slice(0, (num - 3)) + '...';
+          } else if (str.length > num && num <= 3) {
+              return str.slice(0, num) + '...';
+          } else {
+          return str;
+      }    
+    }
+
+    bookDescription = truncateString(bookDescription, 1780);
+    bookTitle = truncateString(bookTitle, 40);
+   
     
     
 
     API.saveBook({
-
       bookid: bookId,
       title: bookTitle,
       authors: bookAuthors,

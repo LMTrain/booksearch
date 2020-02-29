@@ -1,22 +1,26 @@
 import React, { Component } from "react";
 import "./style.css";
 import API from "../utils/API";
-import Container from "../components/Container";
-import Row from "../components/Row";
-import Col from "../components/Col";
+// import Row from "../components/Row";
+// import Col from "../components/Col";
+import { Card, CardHeader, CardBody, Button, Row, Col} from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+// import moment from 'moment';
 
 
 
+var favBooks = []
 class Favorite extends Component {
   state = {
     book: {},
-   
+    favBooks: [],
+    isOpen: false   
   };
+  // this.state.handleToggle  = this.handleToggle.bind(this);
 //HERE IS JUST TO TYPE FOR GITHUB
   // When the component mounts, get a list of all Favorite books in DB and update this.state.
   componentWillMount() {  
-    this.loadBooks();    
-    
+    this.loadBooks();
   }
 
   loadBooks = () => {
@@ -24,9 +28,16 @@ class Favorite extends Component {
       .then(res => {        
         this.setState({ book: res.data, id: "", title: "", authors: "", link: "", thumbnail: "", description: "", publisheddate: "", note: "",})
       }
-      )
+      )      
+      // console.log("THIS IS FAVBOOKS", favBooks)
       .catch(err => console.log(err));
   };
+
+  loadFavBooks = () => {
+    favBooks = this.state.book;
+    console.log("THIS IS FAVBOOKS", favBooks);
+    this.renderDetailModal(favBooks);
+  }
 
   handleNoteSubmit = event => {
     event.preventDefault();
@@ -52,78 +63,90 @@ class Favorite extends Component {
       .catch(err => console.log(err));
   };
   
+  handleToggle() {
+    this.setState({
+        isOpen: !this.state.isOpen
+    });
+  }
 
-  render() {    
+  renderDetailModal(favBooks) {     
+    const { isOpen, toggle} = this.state
+    return favBooks.map((book, index) => {
+      return (
+        <Col key={index} md="4">
+          <p><b>Title: </b>{book.title}</p>
+        
+        <div>
+          {/* <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button> */}
+          <Modal isOpen={isOpen} toggle={toggle}>
+            <ModalHeader toggle={toggle}>{book.title}</ModalHeader>
+            <ModalBody>
+              <p><b>Title: </b>{book.title}</p>
+              <p><b>Authors: </b>{book.authors}</p>
+              <p><b>Published Date: </b>{book.publisheddate}</p>
+              <p><b>Description: </b>{book.description}</p>
+              <p><b>Note: </b>{book.note}</p>
+              {/* <p><b>Date added to Fav: </b>{moment(book.date).format('MMMM YYYY')}</p>                 */}
+            </ModalBody>
+            <ModalFooter>                
+              <Button color="secondary" onClick={toggle}>Cancel</Button>
+            </ModalFooter>
+          </Modal>
+        </div>
+      );
+        </Col>
+      )
+    })  
+  }    
+
+  render() {
+     
     return (
       <div>
-        <h3 className="text-center">My Favorite Books</h3>        
-        <div className="result-box">
-          
-          {this.state.book.length ? (
-                <ul className="list-group search-results">
-                  {this.state.book.map(book => (
-                    <li key={book._id} className="list-group-item">
-                      <span>
-                          <form className="note">
-                            <div className="form-group">
-                              <label htmlFor="note"></label>
-                              <input value={this.state.book.note} name="note" type="text" className="form-control" placeholder="Add a note " id="note"
-                              />       
-                              <button key={book._id} type="submit" onClick={() => this.handleNoteSubmit(book._id)} className="btn btn-success">Add Note</button>
-                            </div>      
-                          </form>
-                        </span>
-                      <Row>
-                        <Col size="md-4">
-                          <div className="card">
-                            <div className="img-container">
-                            <img
-                              alt={book.title} width="150" height="250"
-                              src={book.thumbnail}
-                            />
-                            </div>
-                            <div className="content">
-                              <ul>
-                                <li>
-                                  <b>Title :</b> {book.title}
-                                </li>
-                                <li>
-                                  <b>Authors :</b>{book.authors}
-                                </li>
-                                <li>
-                                  <b>Published Date :</b> {book.publisheddate}
-                                  {/* <span>||</span><span><b>Preview :</b> <a href={book.link} target="_blank" rel="noopener noreferrer">Link</a></span> */}
-                                </li>
-                              </ul>
-                            </div>                        
-                          </div> 
-                          <span><button key={book._id} type="submit" onClick={() => this.deleteBook(book._id)} className="btn btn-success">Remove</button></span>
-                        </Col>
-                        <Col size="md-8">
-                          <div className="detail-card">                            
-                            <div className="content">
-                              <ul>                                
-                                <li>
-                                  <b>Details :</b> {book.description}                                  
-                                </li>
-                              </ul>
-                            </div>                        
-                          </div> 
-                        </Col>
-                      </Row>
-                      
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <h4>...Loading</h4>
-              )}
-        </div>
-        
+        <Row>
+          <Col>
+            <h3 className="text-center">My Favorite Books</h3> 
+          </Col>
+        </Row>
+        <Row>                   
+            {this.state.book.length ? (
+              <div className="book-row-display">
+                {this.state.book.map(book => (
+                  <Col key={book._id} md=""> 
+                    <span onClick={this.loadFavBooks}>                  
+                      {/* <BookCardDetail toggle={this.handleToggle} book={book} isOpen/> */}
+                      <Card className="book-card">                    
+                        <CardHeader className="book-card-header"><b>Title :</b> {book.title}</CardHeader>
+                        <div className="img-container">
+                        <img
+                          alt={book.title} width="130" height="160"
+                          src={book.thumbnail}
+                        />
+                        </div>
+                        <CardBody className="content"> 
+                          <p><b>Authors :</b>{book.authors}</p>
+                          <p><b>Published Date :</b> {book.publisheddate}</p>
+                        </CardBody>
+                        <span>
+                          <Button key={book._id} type="submit" onClick={() => this.deleteBook(book._id)} color="danger" size="sm">Delete</Button>
+                          <Button key={book._id} type="submit" onClick={() => this.editNote(book._id)} color="info" size="sm">Edit Note</Button>
+                        </span>                                       
+                      </Card>                        
+                    </span>                       
+                  </Col>
+                ))}
+              </div>
+                  ) : (
+                    <h4>...Loading</h4>
+                  )}
+           
+        </Row>          
       </div>
-    );
+      );
+    }
   }
-}
+        
+               
 
 export default Favorite;
 
