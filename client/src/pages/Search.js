@@ -136,28 +136,21 @@ class Search extends Component {
     return (
       <div>
         {/* {this.renderRedirect()} */}
-        <Container style={{ minHeight: "80%", width: "100%" }}>
-          <h3 className="text-center">Search For Books</h3>
+        <Container style={{ minHeight: "80%", width: "100%" }}>          
           
-          <SearchForm
+          {showBookState === true ? [] : <SearchForm
             search={this.state.search}
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}            
-          />
+          />}
           
           {!showBookState ? <SearchResults books={this.state.books === undefined ? [] : this.state.books}
           favoriteSubmit={this.favoriteSubmit}         
           handleDetailsSubmit={this.handleDetailsSubmit}
           
           
-          /> : <Details showBook={showBook}/>}
-          {showBookImage == false ? [] : <SearchBookImage />}
-          {/* <div>
-            <img className='image'
-              alt="" width="1050" height="700" position="relative"
-              src={showBookImage == true ? "https://lmtrain.github.io/lm-images/assets/images/books2.jpg" : null}
-              />
-          </div>        */}
+          /> : <Details showBook={showBook} favoriteSubmit={this.favoriteSubmit}/>}
+          {showBookImage === false ? [] : <SearchBookImage />}         
          
         </Container>
       </div>

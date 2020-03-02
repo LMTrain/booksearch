@@ -6,6 +6,7 @@ function SearchForm(props) {
   return (
    <>
     <span>
+      <h3 className="text-center">Search For Books</h3>
       <form className="search">
         <div className="form-group">
           <label htmlFor="search"></label>

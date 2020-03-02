@@ -2,6 +2,18 @@ import React from "react";
 import "./style.css";
 import { Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
 
+function truncateString(str, num) {    
+  if (str.length > num && num > 3) {
+          return str.slice(0, (num - 3)) + '...';
+      } else if (str.length > num && num <= 3) {
+          return str.slice(0, num) + '...';
+      } else {
+      return str;
+  }    
+}
+
+
+
 function SearchResults(props) {
   
   console.log("SEARCH RESULTS", props)
@@ -12,7 +24,7 @@ function SearchResults(props) {
           {props.books.map(result => (   
             <Col key={result.etag} md="4">
                 <Card className="book-card">
-                    <CardHeader className="book-card-header"><b>Title :</b> {result.volumeInfo.title}</CardHeader>
+                    <CardHeader className="book-card-header"><b>Title :</b> {result.volumeInfo.title = truncateString(result.volumeInfo.title, 40)} </CardHeader>
                     <div className="img-container">
                     <img 
                       alt={result.volumeInfo.title} width="130" height="160" 
@@ -20,8 +32,9 @@ function SearchResults(props) {
                       />
                     </div>
                     <CardBody className="content">                      
-                      <span><b>Authors         :</b> {result.volumeInfo.authors} | |</span>
-                      <span><b>Published Date :</b> {result.volumeInfo.publishedDate}</span>
+                      <b>Authors         :</b> {result.volumeInfo.authors = truncateString(result.volumeInfo.authors, 10)}
+                      <br></br>
+                      <b>Published Date :</b> {result.volumeInfo.publishedDate}
                     </CardBody>
                   
                   <span>

@@ -148,7 +148,7 @@ class Favorite extends Component {
                 ))}
               </div>
                   ) : (
-                    <h4>...Loading</h4>
+                    <h2>Loading...</h2>
                   )}
            
         </Row>          

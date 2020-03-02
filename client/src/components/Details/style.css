@@ -1,3 +1,15 @@
 ul.search-results img {
   margin: 0 auto;
 }
+
+
+  .list-group-item {
+    position: relative;    
+    width: 950px;
+    height: 80%;
+    background-color: bisque;    
+    box-shadow: 0 5px 8px #6f6666, 0 5px 8px #6f6666;
+    text-align: left;
+    border-radius: 92px;
+    margin-bottom: 93px;
+}
