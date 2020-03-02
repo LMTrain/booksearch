@@ -1,36 +1,39 @@
 import React from "react";
 import "./style.css";
-
-
+import { Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
 
 function SearchResults(props) {
   
   console.log("SEARCH RESULTS", props)
   return (
              
-    <div className="result-box">
-      <ul className="list-group search-results">
-        {props.books.map(result => (   
-                 
-          <li key={result.etag} className="list-group-item">
-            <img alt={result.volumeInfo.title} width="180" height="200" className="img-fluid" src={result.volumeInfo.imageLinks == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : result.volumeInfo.imageLinks.thumbnail} /><span>     </span>
-            
-            <span><button id={result.etag}type="submit" onClick={() => props.handleDetailsSubmit(result.id)} className="btn btn-success">Detail</button></span><span>  </span>   
-              
-            <span><button id={result.etag} type="submit" onClick={() => props.favoriteSubmit(result.id)} className="btn btn-success">Add to Favorite</button></span><span>  </span>                             
-           
-            <p><b>Title             :</b> {result.volumeInfo.title}</p>
-            <span><b>Authors         :</b> {result.volumeInfo.authors} | |</span>
-            <span><b>Published Date :</b> {result.volumeInfo.publishedDate}</span>
-            
-          </li>          
-          
-        ))}
-        
-      </ul>
-     
+    <Row>
+      <div className="book-row-display">        
+          {props.books.map(result => (   
+            <Col key={result.etag} md="4">
+                <Card className="book-card">
+                    <CardHeader className="book-card-header"><b>Title :</b> {result.volumeInfo.title}</CardHeader>
+                    <div className="img-container">
+                    <img 
+                      alt={result.volumeInfo.title} width="130" height="160" 
+                      src={result.volumeInfo.imageLinks == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : result.volumeInfo.imageLinks.thumbnail} 
+                      />
+                    </div>
+                    <CardBody className="content">                      
+                      <span><b>Authors         :</b> {result.volumeInfo.authors} | |</span>
+                      <span><b>Published Date :</b> {result.volumeInfo.publishedDate}</span>
+                    </CardBody>
                   
-    </div>
+                  <span>
+                    <button id={result.etag}type="submit" onClick={() => props.handleDetailsSubmit(result.id)} className="btn btn-success">Detail</button>  
+                   
+                    <button id={result.etag} type="submit" onClick={() => props.favoriteSubmit(result.id)} className="btn btn-success">Add to Favorite</button>
+                  </span>
+                </Card>
+              </Col>
+            ))} 
+      </div>
+    </Row>      
     
   );
   

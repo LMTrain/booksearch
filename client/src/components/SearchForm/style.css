@@ -1,7 +1,6 @@
 form.search {
   overflow: auto;
-  margin-bottom: 10px;
-  /* width: 800px;  */
+  margin-bottom: 10px;  
   flex-direction: row;
 }
 
@@ -15,8 +14,9 @@ form.search button[type="submit"] {
 
 .form-control {
   display: block;
-  width: 100%;
-  /* height: calc(1.5em + .75rem + 2px); */
+  width: 40%;
+  height: 38px;
+  text-align: center;    
   padding: .375rem .75rem;
   font-size: 1rem;
   font-weight: 400;
@@ -25,22 +25,15 @@ form.search button[type="submit"] {
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
-  border-radius: .85rem;
+  border-radius: .95rem;
   box-shadow: 0 2px 2px #999, 0 2px 2px #999;
   font-size: 12px;
-  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
-
-.image {
-  padding-top: 0px;
-  padding-bottom: 0px;
-  margin-top: -10px;
-  border-radius: .95rem;
-  box-shadow: 0 8px 12px #999, 0 8px 12px #999;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;  
+  
 }
 
 .form-group {
   display: flex;
-  flex-direction: row;
+  flex-direction: row;    
 }
 

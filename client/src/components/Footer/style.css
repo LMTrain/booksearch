@@ -1,16 +1,16 @@
 .footer {
-  /* height: 10px; */
+  min-height: 100px;
   background: rgb(95, 95, 95);
-  position: relative;
+  position: relative ;
 }
 
 .footer span {
   position: absolute;
-  bottom: 0;
+  bottom: 40px;
   left: 0;
   right: 0;
-  padding: 3px;
-  background: rgb(56, 55, 55);
+  padding: 0px;
+  /* background: rgb(56, 55, 55); */
   color: whitesmoke;
   height: 20px;
   font-weight: bold;

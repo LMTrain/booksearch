@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./style.css";
 import API from "../utils/API";
+import Container from "../components/Container";
 // import Row from "../components/Row";
 // import Col from "../components/Col";
 import { Card, CardHeader, CardBody, Button, Row, Col} from 'reactstrap';
@@ -14,6 +15,8 @@ class Favorite extends Component {
   state = {
     book: {},
     favBooks: [],
+    favBookNote: [],
+    note: "",
     isOpen: false   
   };
   // this.state.handleToggle  = this.handleToggle.bind(this);
@@ -56,6 +59,13 @@ class Favorite extends Component {
       .catch(err => console.log(err)); 
   };
 
+  
+  editNote = id => {
+    const bookNote = this.state.book.find((noteBook) => noteBook.id === id);   
+    this.setState({favBookNote: [bookNote]})
+    console.log("FAV BOOK", bookNote)
+    
+  }
   
   deleteBook = id => {
     API.deleteBook(id)
@@ -103,6 +113,7 @@ class Favorite extends Component {
      
     return (
       <div>
+        <Container>
         <Row>
           <Col>
             <h3 className="text-center">My Favorite Books</h3> 
@@ -112,7 +123,7 @@ class Favorite extends Component {
             {this.state.book.length ? (
               <div className="book-row-display">
                 {this.state.book.map(book => (
-                  <Col key={book._id} md=""> 
+                  <Col key={book._id} md="4"> 
                     <span onClick={this.loadFavBooks}>                  
                       {/* <BookCardDetail toggle={this.handleToggle} book={book} isOpen/> */}
                       <Card className="book-card">                    
@@ -141,6 +152,7 @@ class Favorite extends Component {
                   )}
            
         </Row>          
+        </Container>
       </div>
       );
     }

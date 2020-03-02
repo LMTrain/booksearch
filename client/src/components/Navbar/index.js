@@ -38,15 +38,7 @@ function Navbar() {
             >
               Search
             </Link>
-          </li>
-          {/* <li className="nav-item">
-            <Link
-              to="/Details"
-              className={window.location.pathname === "/Details" ? "nav-link active" : "nav-link"}
-            >
-              Book Detail
-            </Link>
-          </li> */}
+          </li>       
         </ul>
       </div>
     </nav>

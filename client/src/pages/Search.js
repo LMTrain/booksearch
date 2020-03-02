@@ -4,6 +4,8 @@ import Container from "../components/Container";
 import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
 import Details from "../components/Details";
+import SearchBookImage from "../components/SearchBookImage";
+import { Redirect } from "react-router-dom";
 
 
 class Search extends Component {
@@ -20,7 +22,10 @@ class Search extends Component {
     publisheddate: "",           
     error: "",
     showBook: [],
-    showBookState: false
+    detailsFavBook: [],
+    showBookState: false,
+    showBookImage: true,
+    redirect: false,
   };
   
   searchForBooks = query => {
@@ -41,21 +46,31 @@ class Search extends Component {
     // Find the id in the state
     const book = this.state.books.find((book) => book.id === id);
     // console.log('found Book', book)
-    this.setState({showBook: [book], showBookState: true})
-        
-  }  
+    this.setState({showBook: [book], detailsFavBook: [book], showBookState: true, showBookImage: false, redirect: true})
+    // this.props.bookDetails(this.state.showBook)       
+  };
+
+  // bookDetails = () => {
+
+  // }
+  renderRedirect = () => {
+    if (this.state.redirect) {      
+      return <Redirect to='/BookDetails' showBook={this.state.showBook}/>
+    }
+  };
 
   handleFormSubmit = event => {
     event.preventDefault();
-    this.searchForBooks(this.state.search);      
+    this.searchForBooks(this.state.search);
+    this.setState({showBookImage: false});
   };
   
   favoriteSubmit = (id) => {
     // var bookThumbnail =" "
     const book = this.state.books.find((book) => book.id === id);   
     this.setState({showBook: [book], showBookState: false})
-    console.log("FAV BOOK", book)
-    console.log("IMAGE URL", book.volumeInfo.imageLinks)
+    // console.log("FAV BOOK", book)
+    // console.log("IMAGE URL", book.volumeInfo.imageLinks)
 
      if (book.volumeInfo.imageLinks === undefined) {
       var bookThumbnail = 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg'
@@ -116,11 +131,12 @@ class Search extends Component {
  
   render() {
     // console.log('this.state.showBook', this.state.showBook)
-    const {showBookState, showBook} = this.state
+    const {showBookState, showBook, showBookImage} = this.state
 
     return (
       <div>
-        <Container style={{ minHeight: "80%" }}>
+        {/* {this.renderRedirect()} */}
+        <Container style={{ minHeight: "80%", width: "100%" }}>
           <h3 className="text-center">Search For Books</h3>
           
           <SearchForm
@@ -128,12 +144,20 @@ class Search extends Component {
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}            
           />
+          
           {!showBookState ? <SearchResults books={this.state.books === undefined ? [] : this.state.books}
           favoriteSubmit={this.favoriteSubmit}         
           handleDetailsSubmit={this.handleDetailsSubmit}
           
           
-          /> : <Details showBook={showBook}/>}       
+          /> : <Details showBook={showBook}/>}
+          {showBookImage == false ? [] : <SearchBookImage />}
+          {/* <div>
+            <img className='image'
+              alt="" width="1050" height="700" position="relative"
+              src={showBookImage == true ? "https://lmtrain.github.io/lm-images/assets/images/books2.jpg" : null}
+              />
+          </div>        */}
          
         </Container>
       </div>

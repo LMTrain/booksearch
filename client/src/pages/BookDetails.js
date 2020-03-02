@@ -3,7 +3,7 @@ import "./style.css";
 
 
 
-function Details(props) { 
+function BookDetails(props) { 
   console.log("THIS IS DETAILS PROPS", props)
   return (
    
@@ -27,4 +27,4 @@ function Details(props) {
 
 
 
-export default Details;
+export default BookDetails;

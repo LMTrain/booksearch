@@ -18,16 +18,15 @@ function SearchForm(props) {
             placeholder="Search for Books or type a title"
             id="search"
           />
-          <span><button type="submit" onClick={props.handleFormSubmit} className="btn btn-success"><span><i className="fa fa-search"></i></span></button></span>
+          <span>
+            <button type="submit" onClick={props.handleFormSubmit} className="btn btn-success">
+              <span><i className="fa fa-search"></i></span>
+            </button>
+          </span>
         </div>
       </form>
     </span>
-    <div>
-      <img className='image'
-          alt="" width="950" height="400"
-          src="https://lmtrain.github.io/lm-images/assets/images/books2.jpg"
-        />
-    </div>
+    
   </>
   );
 }
