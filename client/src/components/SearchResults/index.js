@@ -32,7 +32,7 @@ function SearchResults(props) {
                       />
                     </div>
                     <CardBody className="content">                      
-                      <b>Authors         :</b> {result.volumeInfo.authors = truncateString(result.volumeInfo.authors, 10)}
+                      <b>Authors         :</b> {result.volumeInfo.authors}
                       <br></br>
                       <b>Published Date :</b> {result.volumeInfo.publishedDate}
                     </CardBody>

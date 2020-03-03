@@ -13,3 +13,14 @@ ul.search-results img {
     border-radius: 92px;
     margin-bottom: 93px;
 }
+
+@media (min-width: 576px) {
+
+  .list-group-item:last-child {  
+    border-bottom-right-radius: .25rem;
+    border-bottom-left-radius: .25rem;  
+    margin-bottom: 20px;
+    margin-left: 70px;
+    border-radius: .95rem;
+  }
+}

@@ -137,6 +137,16 @@ class Favorite extends Component {
                         <CardBody className="content"> 
                           <p><b>Authors :</b>{book.authors}</p>
                           <p><b>Published Date :</b> {book.publisheddate}</p>
+                          {/* <span>
+                          <form className="note">
+                            <div className="form-group">
+                              <label htmlFor="note"></label>
+                              <input value={this.state.book.note} name="note" type="text" className="form-control" placeholder="Add a note " id="note"
+                              />        
+                              <button key={book._id} type="submit" onClick={() => this.handleNoteSubmit(book._id)} className="btn btn-success">Save</button>
+                            </div>      
+                          </form>
+                        </span> */}
                         </CardBody>
                         <span>
                           <Button key={book._id} type="submit" onClick={() => this.deleteBook(book._id)} color="danger" size="sm">Delete</Button>
