@@ -5,12 +5,13 @@ import Container from "../components/Container";
 // import Row from "../components/Row";
 // import Col from "../components/Col";
 import { Card, CardHeader, CardBody, Button, Row, Col} from 'reactstrap';
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import NoteModalCard from "../components/Modal/NoteModalCard";
+// import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 // import moment from 'moment';
 
 
 
-var favBooks = []
+var favBookNote = []
 class Favorite extends Component {
   state = {
     book: {},
@@ -36,11 +37,16 @@ class Favorite extends Component {
       .catch(err => console.log(err));
   };
 
-  loadFavBooks = () => {
-    favBooks = this.state.book;
-    console.log("THIS IS FAVBOOKS", favBooks);
-    this.renderDetailModal(favBooks);
-  }
+  loadFavBooks = (id) => {
+    const bookNote = this.state.book.find((bookNote) => bookNote._id === id);
+    // // console.log('fav Book', book)
+    // this.setState({ favBookNote : bookNote})
+    // favBookNote = this.state.favBookNote;
+    console.log("THIS IS FAVBOOKS", bookNote);
+    this.renderDetailModal(bookNote);
+  };
+    
+  
 
   handleNoteSubmit = event => {
     event.preventDefault();
@@ -79,38 +85,29 @@ class Favorite extends Component {
     });
   }
 
-  renderDetailModal(favBooks) {     
-    const { isOpen, toggle} = this.state
-    return favBooks.map((book, index) => {
-      return (
-        <Col key={index} md="4">
-          <p><b>Title: </b>{book.title}</p>
-        
-        <div>
-          {/* <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button> */}
-          <Modal isOpen={isOpen} toggle={toggle}>
-            <ModalHeader toggle={toggle}>{book.title}</ModalHeader>
-            <ModalBody>
-              <p><b>Title: </b>{book.title}</p>
-              <p><b>Authors: </b>{book.authors}</p>
-              <p><b>Published Date: </b>{book.publisheddate}</p>
-              <p><b>Description: </b>{book.description}</p>
-              <p><b>Note: </b>{book.note}</p>
-              {/* <p><b>Date added to Fav: </b>{moment(book.date).format('MMMM YYYY')}</p>                 */}
-            </ModalBody>
-            <ModalFooter>                
-              <Button color="secondary" onClick={toggle}>Cancel</Button>
-            </ModalFooter>
-          </Modal>
-        </div>
-      );
-        </Col>
-      )
-    })  
+  renderDetailModal(bookNote) {
+    favBookNote = bookNote;
+    console.log("THIS IS favBookNote", favBookNote);
+    console.log("THIS IS bookNote", [bookNote]);
+    console.log("THIS IS bookNote", [bookNote].authors);
+    // return bookNote.map((noteBook, index) => {
+    //   return (
+    //     <Col key={index} md="4">
+    //         <NoteModalCard noteBook={noteBook}>
+    //         {<>
+    //           <Button onClick={(e) => this.navigateToEdit(noteBook._id, e)} color="warning">Edit</Button>{' '}
+    //           <Button onClick={(e) => this.displayDeleteWarning(noteBook._id, e)} color="danger">Delete</Button>
+    //         </>
+    //         }
+    //         </NoteModalCard> 
+    //     </Col>
+    //   )
+    // })
+
   }    
 
   render() {
-     
+    const {bookNote} = this.props;
     return (
       <div>
         <Container>
@@ -124,7 +121,7 @@ class Favorite extends Component {
               <div className="book-row-display">
                 {this.state.book.map(book => (
                   <Col key={book._id} md="4"> 
-                    <span onClick={this.loadFavBooks}>                  
+                    <span onClick={() => this.loadFavBooks(book._id)}>                  
                       {/* <BookCardDetail toggle={this.handleToggle} book={book} isOpen/> */}
                       <Card className="book-card">                    
                         <CardHeader className="book-card-header"><b>Title :</b> {book.title}</CardHeader>
@@ -161,7 +158,10 @@ class Favorite extends Component {
                     <h2>Loading...</h2>
                   )}
            
-        </Row>          
+        </Row>
+        <Row>
+          { this.renderDetailModal(bookNote) }
+        </Row>         
         </Container>
       </div>
       );
