@@ -5,7 +5,7 @@ import Container from "../components/Container";
 // import Row from "../components/Row";
 // import Col from "../components/Col";
 import { Card, CardHeader, CardBody, Button, Row, Col} from 'reactstrap';
-import NoteModalCard from "../components/Modal/NoteModalCard";
+import AddNote from "../components/Modal/AddNote"
 // import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 // import moment from 'moment';
 
@@ -99,13 +99,13 @@ class Favorite extends Component {
     console.log("THIS IS favBookNote", favBookNote);
     // console.log("THIS IS bookNote", [bookNote]);
 
-    return (
-      <SearchForm
-        search={this.state.search}
-        handleFormSubmit={this.handleFormSubmit}
-        handleInputChange={this.handleInputChange}            
-      />
-    )
+    // return (
+    //   <SearchForm
+    //     search={this.state.search}
+    //     handleFormSubmit={this.handleFormSubmit}
+    //     handleInputChange={this.handleInputChange}            
+    //   />
+    // )
       // return (
       //   <Col>
       //       <NoteModalCard noteBook={favBookNote}>
@@ -120,7 +120,7 @@ class Favorite extends Component {
   }    
 
   render() {
-    const {favBookNote} = this.props;
+    // const {favBookNote} = this.props;
     return (
       <div>
         <Container>
@@ -147,6 +147,7 @@ class Favorite extends Component {
                         <CardBody className="content"> 
                           <p><b>Authors :</b>{book.authors}</p>
                           <p><b>Published Date :</b> {book.publisheddate}</p>
+                          <AddNote />
                           {/* <span>
                           <form className="note">
                             <div className="form-group">
@@ -172,9 +173,9 @@ class Favorite extends Component {
                   )}
            
         </Row>
-        <Row>
+        {/* <Row>
           { this.renderDetailModal(favBookNote) }
-        </Row>         
+        </Row>          */}
         </Container>
       </div>
       );
