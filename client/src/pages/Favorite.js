@@ -43,10 +43,19 @@ class Favorite extends Component {
     // this.setState({ favBookNote : bookNote})
     // favBookNote = this.state.favBookNote;
     console.log("THIS IS FAVBOOKS", bookNote);
-    this.renderDetailModal(bookNote);
+    console.log("THIS IS DATE")
+    favBookNote = bookNote
+    this.renderDetailModal();
   };
     
-  
+
+  handleInputChange = event => {
+    const name = event.target.name;
+    const value = event.target.value;
+    this.setState({
+      [name]: value
+    });
+  };
 
   handleNoteSubmit = event => {
     event.preventDefault();
@@ -55,7 +64,7 @@ class Favorite extends Component {
 
   addNote = (id) => {
     const book = this.state.book.find((book) => book._id === id);
-    // console.log('fav Book', book)
+    console.log('fav Book', book)
     this.setState({ book })
     let bookNote = String(this.state.book.note)
     API.updateBook({
@@ -85,29 +94,33 @@ class Favorite extends Component {
     });
   }
 
-  renderDetailModal(bookNote) {
-    favBookNote = bookNote;
+  renderDetailModal() {
+    
     console.log("THIS IS favBookNote", favBookNote);
-    console.log("THIS IS bookNote", [bookNote]);
-    console.log("THIS IS bookNote", [bookNote].authors);
-    // return bookNote.map((noteBook, index) => {
-    //   return (
-    //     <Col key={index} md="4">
-    //         <NoteModalCard noteBook={noteBook}>
-    //         {<>
-    //           <Button onClick={(e) => this.navigateToEdit(noteBook._id, e)} color="warning">Edit</Button>{' '}
-    //           <Button onClick={(e) => this.displayDeleteWarning(noteBook._id, e)} color="danger">Delete</Button>
-    //         </>
-    //         }
-    //         </NoteModalCard> 
-    //     </Col>
-    //   )
-    // })
+    // console.log("THIS IS bookNote", [bookNote]);
 
+    return (
+      <SearchForm
+        search={this.state.search}
+        handleFormSubmit={this.handleFormSubmit}
+        handleInputChange={this.handleInputChange}            
+      />
+    )
+      // return (
+      //   <Col>
+      //       <NoteModalCard noteBook={favBookNote}>
+      //       {<>
+      //         <Button onClick={(e) => this.navigateToEdit(noteBook._id, e)} color="warning">Edit</Button>{' '}
+      //         <Button onClick={(e) => this.displayDeleteWarning(noteBook._id, e)} color="danger">Delete</Button>
+      //       </>
+      //       }
+      //       </NoteModalCard> 
+      //   </Col>
+      // )  
   }    
 
   render() {
-    const {bookNote} = this.props;
+    const {favBookNote} = this.props;
     return (
       <div>
         <Container>
@@ -160,7 +173,7 @@ class Favorite extends Component {
            
         </Row>
         <Row>
-          { this.renderDetailModal(bookNote) }
+          { this.renderDetailModal(favBookNote) }
         </Row>         
         </Container>
       </div>

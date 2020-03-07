@@ -4,8 +4,8 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 class NoteModal extends React.Component { 
     
   render() {
-      const { isOpen, toggle, bookNote } = this.props;
-      console.log("PROPS FROM NOTEMODAL", bookNote)
+      const { isOpen, toggle, favBookNote } = this.props;
+      console.log("PROPS FROM NOTEMODAL", favBookNote)
       return (
         <div>
           {/* <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button> */}
