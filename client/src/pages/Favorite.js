@@ -73,10 +73,10 @@ class Favorite extends Component {
   addNote = (id) => {
     console.log(this.state.note)
     console.log("THIS IS ID", id)
-    let bookNote = String(this.state.note)
+    let bookNote = this.state.note
     API.updateBook({
       _id: id,
-      note: bookNote,      
+      note: bookNote      
     })
       .then(res => {console.log(res)})
       .catch(err => console.log(err)); 

@@ -27,7 +27,7 @@ module.exports = {
     console.log("THIS IS UPDATE")
     
     db.Book
-      .findOneAndUpdate({ _id: req.params.id }, {$set: {note: req.body}})
+      .findOneAndUpdate({ _id: req.params.id }, {$set: {note: "This Book is funny"}})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
