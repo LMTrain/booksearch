@@ -15,8 +15,7 @@ function truncateString(str, num) {
 
 
 function SearchResults(props) {
-  
-  console.log("SEARCH RESULTS", props)
+ 
   return (
              
     <Row>

@@ -21,7 +21,12 @@ export default {
     return axios.get("/api/books/" + id);
   },
   // Update the book with the given id
-    updateBook: function(id) {
+    updateBook: function(idd) {
+      console.log("API ID", idd)
+      const id = idd._id;
+      const noted = idd.note;
+      console.log(noted)
+      console.log(id)
     return axios.put("/api/books/" + id);
   },
   // Deletes the book with the given id

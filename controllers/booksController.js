@@ -16,18 +16,22 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
+    console.log(req.body.title),
     db.Book
       .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
+    console.log(req.body)
+    console.log("THIS IS UPDATE")
+    
     db.Book
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .findOneAndUpdate({ _id: req.params.id }, {$set: {note: req.body}})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  remove: function(req, res) {
+  remove: function(req, res) {    
     db.Book
       .findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())

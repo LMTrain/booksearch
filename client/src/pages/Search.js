@@ -60,8 +60,10 @@ class Search extends Component {
   };
 
   handleFormSubmit = event => {
+    console.log(event)
     event.preventDefault();
     this.searchForBooks(this.state.search);
+    console.log("THIS IS SEARCH", this.state.search)
     this.setState({showBookImage: false});
   };
   
@@ -108,10 +110,7 @@ class Search extends Component {
     }
 
     bookDescription = truncateString(bookDescription, 1780);
-    bookTitle = truncateString(bookTitle, 40);
-   
-    
-    
+    bookTitle = truncateString(bookTitle, 40);    
 
     API.saveBook({
       bookid: bookId,

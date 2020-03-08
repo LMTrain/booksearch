@@ -1,26 +1,30 @@
 import React from "react";
 import "./style.css";
 
-
-function NoteForm(props) { 
+// Using the datalist element we can create autofill suggestions based on the props.breeds array
+function NoteForm(props) {
+  // console.log("THIS IS NOTEFORM PROPS", props) 
   return (
    <>
-    <span>    
-      <form className="search">
+    <span>     
+      <form className="note">
         <div className="form-group">
-          <label htmlFor="search"></label>
+          <label htmlFor="note"></label>
           <input
-            value={props.search}
+            value={props.note}
             onChange={props.handleInputChange}
-            name="search"          
+            name="note"          
             type="text"
             className="form-control"
-            placeholder="Search for Books or type a title"
-            id="search"
+            placeholder="Add Note"
+            id="note"
           />
           <span>
-            <button type="submit" onClick={props.handleFormSubmit} className="btn btn-success">
-              <span><i className="fa fa-search"></i></span>
+            <button 
+              type="submit" 
+              onClick={props.handleFormSubmit} 
+              className="btn btn-success">
+              <span>Save</span>
             </button>
           </span>
         </div>
@@ -32,35 +36,3 @@ function NoteForm(props) {
 }
 
 export default NoteForm;
-
-
-
-
-addingNote = () => { 
-    return (
-     <>
-      <span>        
-        <form className="note">
-          <div className="form-group">
-            <label htmlFor="note"></label>
-            <input
-              value={this.state.note}
-              onChange={this.handleInputChange()}
-              name="note"          
-              type="text"
-              className="form-control"
-              placeholder="Add your note to book"
-              id="note"
-            />
-            <span>
-              <button type="submit" onClick={this.handleNoteSubmit()} className="btn btn-success">
-                <span><i className="fa fa-search"></i></span>
-              </button>
-            </span>
-          </div>
-        </form>
-      </span>
-      
-    </>
-    );
-  }

@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import "./style.css";
 import API from "../utils/API";
 import Container from "../components/Container";
+import NoteForm from "../components/NoteForm";
 // import Row from "../components/Row";
 // import Col from "../components/Col";
 import { Card, CardHeader, CardBody, Button, Row, Col} from 'reactstrap';
-import AddNote from "../components/Modal/AddNote"
 // import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 // import moment from 'moment';
 
@@ -42,32 +42,40 @@ class Favorite extends Component {
     // // console.log('fav Book', book)
     // this.setState({ favBookNote : bookNote})
     // favBookNote = this.state.favBookNote;
-    console.log("THIS IS FAVBOOKS", bookNote);
     console.log("THIS IS DATE")
-    favBookNote = bookNote
+    favBookNote = bookNote    
+    console.log("THIS IS FAVBOOKS", favBookNote);
+    console.log("THIS IS BOOK ID", favBookNote._id )
     this.renderDetailModal();
   };
     
 
   handleInputChange = event => {
-    const name = event.target.name;
+    const note = event.target.name;
     const value = event.target.value;
+    console.log(note)
+    console.log(value)
     this.setState({
-      [name]: value
+      [note]: value
     });
+   
   };
 
-  handleNoteSubmit = event => {
+  handleFormSubmit = event => {
+    console.log(event)
     event.preventDefault();
-    this.addNote(this.state.book.note);         
+    this.addNote(favBookNote._id);
+    console.log("THIS IS NOTE", this.state.note)
+    // this.setState({note : value})    
+    // this.addNote(id);
   };
 
   addNote = (id) => {
-    const book = this.state.book.find((book) => book._id === id);
-    console.log('fav Book', book)
-    this.setState({ book })
-    let bookNote = String(this.state.book.note)
+    console.log(this.state.note)
+    console.log("THIS IS ID", id)
+    let bookNote = String(this.state.note)
     API.updateBook({
+      _id: id,
       note: bookNote,      
     })
       .then(res => {console.log(res)})
@@ -75,10 +83,10 @@ class Favorite extends Component {
   };
 
   
-  editNote = id => {
-    const bookNote = this.state.book.find((noteBook) => noteBook.id === id);   
-    this.setState({favBookNote: [bookNote]})
+  editNote = (id) => {
+    const bookNote = this.state.book.find((bookNote) => bookNote._id === id);  
     console.log("FAV BOOK", bookNote)
+    
     
   }
   
@@ -96,31 +104,10 @@ class Favorite extends Component {
 
   renderDetailModal() {
     
-    console.log("THIS IS favBookNote", favBookNote);
-    // console.log("THIS IS bookNote", [bookNote]);
-
-    // return (
-    //   <SearchForm
-    //     search={this.state.search}
-    //     handleFormSubmit={this.handleFormSubmit}
-    //     handleInputChange={this.handleInputChange}            
-    //   />
-    // )
-      // return (
-      //   <Col>
-      //       <NoteModalCard noteBook={favBookNote}>
-      //       {<>
-      //         <Button onClick={(e) => this.navigateToEdit(noteBook._id, e)} color="warning">Edit</Button>{' '}
-      //         <Button onClick={(e) => this.displayDeleteWarning(noteBook._id, e)} color="danger">Delete</Button>
-      //       </>
-      //       }
-      //       </NoteModalCard> 
-      //   </Col>
-      // )  
+    console.log("THIS IS favBookNote", favBookNote);    
   }    
 
-  render() {
-    // const {favBookNote} = this.props;
+  render() {    
     return (
       <div>
         <Container>
@@ -133,7 +120,8 @@ class Favorite extends Component {
             {this.state.book.length ? (
               <div className="book-row-display">
                 {this.state.book.map(book => (
-                  <Col key={book._id} md="4"> 
+                  <Col key={book._id} md="4">
+                   {/* <span> */}
                     <span onClick={() => this.loadFavBooks(book._id)}>                  
                       {/* <BookCardDetail toggle={this.handleToggle} book={book} isOpen/> */}
                       <Card className="book-card">                    
@@ -146,24 +134,42 @@ class Favorite extends Component {
                         </div>
                         <CardBody className="content"> 
                           <p><b>Authors :</b>{book.authors}</p>
-                          <p><b>Published Date :</b> {book.publisheddate}</p>
-                          <AddNote />
-                          {/* <span>
-                          <form className="note">
+                          <p><b>Published Date :</b> {book.publisheddate}</p>                         
+                          <span>
+                          {/* <form className="note">
                             <div className="form-group">
                               <label htmlFor="note"></label>
-                              <input value={this.state.book.note} name="note" type="text" className="form-control" placeholder="Add a note " id="note"
+                              <input
+                                value={this.state.note}
+                                onChange={this.state.handleInputChange}
+                                name="note" 
+                                type="text" 
+                                className="form-control" 
+                                placeholder="Add a note " 
+                                id="note"
                               />        
-                              <button key={book._id} type="submit" onClick={() => this.handleNoteSubmit(book._id)} className="btn btn-success">Save</button>
+                              <button                                
+                                type="submit" 
+                                onClick={() => this.handleNoteSubmit()} 
+                                className="btn btn-success">
+                                Save
+                              </button>
                             </div>      
-                          </form>
-                        </span> */}
+                          </form> */}
+                          <NoteForm                            
+                            note={this.state.note}
+                            handleFormSubmit={this.handleFormSubmit}
+                            handleInputChange={this.handleInputChange}            
+                          />
+                        </span>
+
                         </CardBody>
-                        <span>
-                          <Button key={book._id} type="submit" onClick={() => this.deleteBook(book._id)} color="danger" size="sm">Delete</Button>
-                          <Button key={book._id} type="submit" onClick={() => this.editNote(book._id)} color="info" size="sm">Edit Note</Button>
+                        <span>                         
+                          <Button type="submit" onClick={() => this.deleteBook(book._id)} color="danger" size="sm">Delete</Button>
+                          <Button type="submit" onClick={() => this.editNote(book._id)} color="info" size="sm">Add Note</Button>
+
                         </span>                                       
-                      </Card>                        
+                      </Card>                                          
                     </span>                       
                   </Col>
                 ))}
@@ -172,10 +178,7 @@ class Favorite extends Component {
                     <h2>Loading...</h2>
                   )}
            
-        </Row>
-        {/* <Row>
-          { this.renderDetailModal(favBookNote) }
-        </Row>          */}
+        </Row>      
         </Container>
       </div>
       );

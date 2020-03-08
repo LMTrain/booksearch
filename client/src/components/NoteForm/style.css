@@ -1,0 +1,39 @@
+form.search {
+  overflow: auto;
+  margin-bottom: 10px;  
+  flex-direction: row;
+}
+
+form.search button[type="submit"] {
+  float: right;
+  margin-top: 1px;
+  border-radius: .95rem;
+  font-size: small;
+  box-shadow: 0 2px 2px #999, 0 2px 2px #999;
+}
+
+.form-control {
+  display: block;
+  width: 40%;
+  height: 38px;
+  text-align: center;    
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .95rem;
+  box-shadow: 0 2px 2px #999, 0 2px 2px #999;
+  font-size: 12px;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;  
+  
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;    
+}
+

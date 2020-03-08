@@ -20,7 +20,10 @@ function SearchForm(props) {
             id="search"
           />
           <span>
-            <button type="submit" onClick={props.handleFormSubmit} className="btn btn-success">
+            <button 
+              type="submit" 
+              onClick={props.handleFormSubmit} 
+              className="btn btn-success">
               <span><i className="fa fa-search"></i></span>
             </button>
           </span>
