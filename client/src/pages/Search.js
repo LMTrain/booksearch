@@ -109,8 +109,9 @@ class Search extends Component {
       }    
     }
 
+    bookAuthors = truncateString(bookAuthors, 10); 
     bookDescription = truncateString(bookDescription, 1780);
-    bookTitle = truncateString(bookTitle, 40);    
+    bookTitle = truncateString(bookTitle, 40); 
 
     API.saveBook({
       bookid: bookId,

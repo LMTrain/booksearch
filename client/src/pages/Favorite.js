@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./style.css";
 import API from "../utils/API";
 import Container from "../components/Container";
-import NoteForm from "../components/NoteForm";
+// import NoteForm from "../components/NoteForm";
 // import Row from "../components/Row";
 // import Col from "../components/Col";
 import { Card, CardHeader, CardBody, Button, Row, Col} from 'reactstrap';
@@ -156,11 +156,11 @@ class Favorite extends Component {
                               </button>
                             </div>      
                           </form> */}
-                          <NoteForm                            
+                          {/* <NoteForm                            
                             note={this.state.note}
                             handleFormSubmit={this.handleFormSubmit}
                             handleInputChange={this.handleInputChange}            
-                          />
+                          /> */}
                         </span>
 
                         </CardBody>
