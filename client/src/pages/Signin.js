@@ -118,8 +118,8 @@ class Signin extends Component {
 
   render() {
     if (this.state.redirect) {
-      this.props.saveMemberID(UsermemberID)
-      return <Redirect to='/UserPage' />
+      // this.props.saveMemberID(UsermemberID)
+      return <Redirect to='/search' />
     }    
     return (
       <div>            

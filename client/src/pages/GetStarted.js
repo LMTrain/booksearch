@@ -32,9 +32,8 @@ class GetStarted extends Component {
   };
 
   renderRedirect = () => {
-    if (this.state.redirect) {
-      
-      this.props.saveMemberID(UsermemberID) 
+    if (this.state.redirect) {      
+      // this.props.saveMemberID(UsermemberID) 
       return <Redirect to='/Signin' />
     }
   };  
@@ -46,7 +45,6 @@ class GetStarted extends Component {
       [name]: value,
     });
   };
-
 
   handleFormSubmit = event => {
     event.preventDefault();
