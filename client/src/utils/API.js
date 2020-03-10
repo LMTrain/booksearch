@@ -36,5 +36,32 @@ export default {
   // Saves a book to the database
   saveBook: function(bookData) {
     return axios.post("/api/books", bookData);
+  },
+
+  // Gets all users
+  getUsers: function() {
+    return axios.get("/api/users");
+  },
+  // Gets the user with the given id
+  getUser: function(currentAccount) {
+    return axios.get(`/api/users/current/${currentAccount.userName}`);
+  },
+  // Update the user with the given id
+  updateUser: function(id) {
+    return axios.put("/api/users", id);
+  },
+
+  deleteUser: function(id) {    
+    return axios.delete("/api/users/" + id);
+  },
+  // Saves a user to the database.
+  saveUser: function(newAccount) {
+    return axios.post("/api/users", newAccount);
+  },
+  loginUser: function(userAccount) {
+    return axios.post("/api/users/login", userAccount);
   }
+
+
+  
 };

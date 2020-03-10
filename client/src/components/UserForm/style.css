@@ -31,13 +31,24 @@ form.search button[type="submit"] {
 .form-groups {
   width: 400px;
   font-size: 14px;
-  border: solid 0.5px;
-  height: 250px;
-  /* margin-left: 320px; */
-  box-shadow: 0 2px 2px #999, 0 2px 2px #999;
-  border-radius: .95rem;
+  
+  height: 250px; 
+  
+  
   font-size: 12px;
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.card {
+  border-radius: 2px;
+  height: 400px;
+  position: relative;
+  width: 450px;
+  background-color: white;
+  box-shadow: 0 5px 8px #6f6666, 0 5px 8px #6f6666;
+  text-align: left;
+  border-radius: .95rem;
+  margin-bottom: 5px;
 }
 
 .form-control {
@@ -80,3 +91,6 @@ form.search button[type="submit"] {
   box-shadow: 0 2px 2px #999, 0 2px 2px #999;
 }
 
+#message{
+  color:red;
+}

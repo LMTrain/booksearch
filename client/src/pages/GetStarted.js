@@ -19,21 +19,25 @@ class GetStarted extends Component {
     createdAccount: 0
   };
 
+  loadSignInPage = () => {    
+    this.setRedirect()
+    
+  };
   
   setRedirect = () => {    
     this.setState({
       redirect: true,
       
     })
-  }
+  };
+
   renderRedirect = () => {
     if (this.state.redirect) {
       
       this.props.saveMemberID(UsermemberID) 
-      return <Redirect to='/PersonalizePage' />
+      return <Redirect to='/Signin' />
     }
-  }
-  
+  };  
  
   handleInputChange = event => {
     const name = event.target.name;
@@ -83,36 +87,13 @@ class GetStarted extends Component {
     let userName = String(newAccount.memberemail)
     let email = String(newAccount.memberemail)
     let password = String(newAccount.memberpassword)
-    let formCcard = 0
-    let formAddress = ""
-    let formPhone = ""    
-    let formTheme = ""   
-    let formImage = ""
-    let formColor = ""
-    let formTextAlign = ""
-    let formDivFontSize = ""
-    let formpFontSize = ""
-    let formfontFamily = ""
 
     API.saveUser({
       memberId: memberId,
       memberName: memberName,
       userName: userName,
       email: email,
-      password: password,
-      cCard: formCcard,
-      userTheme:formTheme,
-      userImage: formImage,
-      colorDb: formColor,
-      textalignDb: formTextAlign,
-      divfontsizeDb: formDivFontSize,
-      pfontsizeDb: formpFontSize,
-      fontfamilyDb: formfontFamily,
-      contact: {
-        address: formAddress,
-        phone: formPhone,
-        email: email,
-      },
+      password: password,      
       
     })
       .then(res => {
@@ -122,7 +103,7 @@ class GetStarted extends Component {
           document.getElementById("message").textContent = res.data.error;
         }else{
          
-          this.loadPersonalizePage()
+          this.loadSignInPage()
         }
       
       })

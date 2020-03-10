@@ -46,7 +46,15 @@ function Navbar() {
             >
               Get Started
             </Link>
-          </li>             
+          </li>
+          <li className="nav-item">
+            <Link
+              to="/signin"
+              className={window.location.pathname === "/signin" ? "nav-link active" : "nav-link"}
+            >
+              Sign In
+            </Link>
+            </li>             
         </ul>
       </div>
     </nav>

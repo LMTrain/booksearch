@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Container from "../components/Container";
 import { Redirect } from "react-router-dom";
-import "./style.css";
+// import "./style.css";
 import API from "../utils/API";
+import { Button } from 'reactstrap';
 
 
 var UsermemberID = ""
@@ -126,10 +127,10 @@ class Signin extends Component {
           <div className="card card-body">
             {/* <div id="message"></div> */}
             <div id ="message">{this.message}</div>
-            <h4 className="text-center mb-3">Sign In</h4>
+            <h5 className="text-center mb-3">Sign In</h5>
             <form className="form-groups">          
               <div className="form-group">
-                <label id="username">Username</label>
+                <label id="username"></label>
                 <input 
                   value={this.memberemail}
                   onChange={this.handleInputChange}
@@ -141,7 +142,7 @@ class Signin extends Component {
                   />
               </div>
               <div className="form-group">
-                <label id="password">Password</label>
+                <label id="password"></label>
                 <input 
                   value={this.memberpassword}
                   onChange={this.handleInputChange}
@@ -152,9 +153,16 @@ class Signin extends Component {
                   id="memberpassword" 
                   />
               </div>
-              <span className="signin-btn"><button type="submit" onClick={this.signInSubmit} className="btn btn-primary float-left">Sign In</button></span>
-            </form>
-            <p className="lead mt-4">No Account? <a href="/Getstarted">Create Account</a></p>
+              
+            </form>            
+            <div className="getstarted">
+          <span>
+            <Button 
+              type="submit" onClick={this.signInSubmit} color="info" size="sm">Sign In
+            </Button>{" "}         
+            No Account? <a href="/Getstarted">Create Account</a>
+          </span>
+        </div>
           </div>
         </Container>
       </div>

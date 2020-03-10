@@ -13,8 +13,17 @@ import UserPage from "./pages/UserPage";
 
 
 require('dotenv').config();
+// var currentUser = null;
+// var memberInfo = '';
+// saveMemberID = (mID) => {
+//   memberInfo = mID
+//   currentUser = mID
+//   this.getMemberInfo()
+// };
+
 
 function App() {
+ 
   return (
     <Router>
       <div>
@@ -27,8 +36,9 @@ function App() {
           <Route exact path="/Favorite" component={Favorite} />      
           <Route exact path="/search" component={Search} />
           <Route exact path="/Getstarted" component={GetStarted} />   
-          <Route exact path="/Signin" render = { () => <Signin saveMemberID={this.saveMemberID} />}/>
+          <Route exact path="/Signin" component={Signin}/>
           <Route exact path="/Sign out" render = { () => <About/>}/>
+          {/* <Route exact path="/Signin" render = { () => <Signin saveMemberID={this.saveMemberID} />}/> */}
           {/* <Route exact path="/Getstarted" render = { () => <GetStarted saveMemberID={this.saveMemberID} />}/>           */}
           {/* <Route exact path="/UserPage" render = { () => <UserPage logOut={this.logOut} saveMemberID={this.saveMemberID} currentUser={this.state.currentUser} />}/> */}
         </Wrapper>
