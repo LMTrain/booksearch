@@ -1,12 +1,16 @@
 .getstarted {
-  margin-left: 300px;
+  /* margin-left: 300px; */
   margin-top: 10px;
-  font-size: 22px;
-  flex-direction: row;
+  font-size: 16px;
+  vertical-align: middle;
+  
+  
+  
 }
 
-.gs-card card-body {
-  align-items: center;
+.gs-card-card-body {
+/* text-align: center; */
+position: relative;
 }
 
 
@@ -63,5 +67,16 @@ form.search button[type="submit"] {
   margin-left: 25px;
   height: 40px; 
   width: 850px;   
+}
+
+.btn-group-sm>.btn, .btn-sm {
+  padding: .25rem .5rem;
+  font-size: .875rem;
+  line-height: 1.5;
+  border-radius: .2rem;
+  border-radius: 95px;
+  margin-bottom: 10px;
+  margin-left:50px;
+  box-shadow: 0 2px 2px #999, 0 2px 2px #999;
 }
 

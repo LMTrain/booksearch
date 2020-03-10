@@ -6,9 +6,9 @@ import { Button } from 'reactstrap';
 // Using the datalist element we can create autofill suggestions based on the props.breeds array
 function UserForm(props) {
   return (
-    <div className="gs-card card-body">
+    <div className="gs-card-card-body">
       <div id="message"></div>
-      <h4 className="text-center mb-3">Create Account</h4>
+      <h5>Create Account</h5>
         <form className="form-groups">
           <div className="form-group">
             <label htmlFor="membername"></label>
@@ -60,11 +60,11 @@ function UserForm(props) {
           </div>
         </form>
         <div className="getstarted">
-          <span className="lead mt-4">
+          <span>
             <Button 
               type="submit" onClick={props.handleFormSubmit} color="info" size="sm">Create Account
-            </Button>         
-            <p >Have An Account? <a href="/Signin/">Sign In</a></p>
+            </Button>{" "}         
+            Have An Account? <a href="/Signin/">Sign In</a>
           </span>
         </div>
     </div>
