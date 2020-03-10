@@ -120,12 +120,26 @@ class Favorite extends Component {
             {this.state.book.length ? (
               <div className="book-row-display">
                 {this.state.book.map(book => (
-                  <Col key={book._id} md="4">
+                  <Col key={book._id} md="3">
                    {/* <span> */}
                     <span onClick={() => this.loadFavBooks(book._id)}>                  
                       {/* <BookCardDetail toggle={this.handleToggle} book={book} isOpen/> */}
                       <Card className="book-card">                    
-                        <CardHeader className="book-card-header"><b>Title :</b> {book.title}</CardHeader>
+                        <CardHeader className="book-card-header">
+                          <Row>
+                            <Col md="10">
+                              <b>Title :</b> {book.title}
+                            </Col>
+                            <Col md="2">
+                            <span className="delete-button">
+                          <span onClick={() => this.deleteBook(book._id)}><b>X</b></span>
+                            {/* <Button type="submit" onClick={() => this.deleteBook(book._id)} color="danger" size="sm">X</Button> */}
+                          </span>
+                            </Col>
+                          </Row>
+                          
+                          
+                        </CardHeader>
                         <div className="img-container">
                         <img
                           alt={book.title} width="130" height="160"
@@ -133,7 +147,7 @@ class Favorite extends Component {
                         />
                         </div>
                         <CardBody className="content"> 
-                          <p><b>Authors :</b>{book.authors}</p>
+                <p><b>Authors :</b>{" "}{book.authors}</p>
                           <p><b>Published Date :</b> {book.publisheddate}</p>                         
                           <span>
                           {/* <form className="note">
@@ -165,8 +179,8 @@ class Favorite extends Component {
 
                         </CardBody>
                         <span>                         
-                          <Button type="submit" onClick={() => this.deleteBook(book._id)} color="danger" size="sm">Delete</Button>
-                          <Button type="submit" onClick={() => this.editNote(book._id)} color="info" size="sm">Add Note</Button>
+                          {/* <Button type="submit" onClick={() => this.deleteBook(book._id)} color="danger" size="sm">Delete</Button> */}
+                          {/* <Button type="submit" onClick={() => this.editNote(book._id)} color="info" size="sm">Add Note</Button> */}
 
                         </span>                                       
                       </Card>                                          

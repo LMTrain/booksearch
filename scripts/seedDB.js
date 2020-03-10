@@ -11,6 +11,7 @@ mongoose.connect(
 const bookSeed = [
   {
     bookid: "kingStePhenks",
+    bookmember: "femoo@msn.com",
     title: "1922",
     authors: "Stephen King",
     link: "http://books.google.com/books?id=Dc9cxQEACAAJ&dq=Stephen+King&hl=&source=gbs_api",
@@ -22,7 +23,8 @@ const bookSeed = [
     date: new Date(Date.now())
   },
   {
-    id: "tornCindytc",
+    bookid: "tornCindytc",
+    bookmember: "femoo@msn.com",
     title: "Lord of the Flies",
     authors: "Cindy Torn",
     link: "http://books.google.com/books?id=zvm_wwEACAAJ&dq=lord+of+the+flies&hl=&source=gbs_api",
@@ -34,7 +36,8 @@ const bookSeed = [
     date: new Date(Date.now())
   },
   {
-    id: "salingerJDsjd",
+    bookid: "salingerJDsjd",
+    bookmember: "femoo@msn.com",
     title: "The Catcher in the Rye",
     authors: "J.D. Salinger",
     link: "http://books.google.com/books?id=Dc9cxQEACAAJ&dq=Stephen+King&hl=&source=gbs_api",
@@ -46,7 +49,8 @@ const bookSeed = [
     date: new Date(Date.now())
   },  
   {
-    id: "noahTrevornt",
+    bookid: "noahTrevornt",
+    bookmember: "femoo@msn.com",
     title: "Born a Crime: Stories from a South African Childhood",
     authors: "Trevor Noah",
     link: "http://books.google.com/books?id=Dc9cxQEACAAJ&dq=Stephen+King&hl=&source=gbs_api",

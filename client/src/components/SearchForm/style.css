@@ -2,6 +2,15 @@ form.search {
   overflow: auto;
   margin-bottom: 10px;  
   flex-direction: row;
+  display: flex;
+}
+
+.btn-info {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+  height: 40px;
+  margin-top: 15px;
 }
 
 form.search button[type="submit"] {
@@ -32,8 +41,13 @@ form.search button[type="submit"] {
   
 }
 
-.form-group {
+.search-form-group {
   display: flex;
-  flex-direction: row;    
+  flex-direction: row;
+  margin-top: 17px;
+  margin-left: -1px;
+  height: 40px; 
+  width: 1000px;   
 }
+
 

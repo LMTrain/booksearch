@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Container from "../components/Container";
 import { Redirect } from "react-router-dom";
-// import "./style.css";
+import "./style.css";
 import API from "../utils/API";
 import { Button } from 'reactstrap';
 
@@ -9,7 +9,7 @@ import { Button } from 'reactstrap';
 var UsermemberID = ""
 class Signin extends Component {
   state = {
-    memberId: "",
+    memberId: null,
     user:{},
     membername: "",
     userName: "",
@@ -17,9 +17,7 @@ class Signin extends Component {
     redirect: false,
     isError: false,
     errorMessage: '',
-    message: '',
-   
-    
+    message: '', 
   };
 
 
@@ -104,9 +102,9 @@ class Signin extends Component {
           userName: data[0].memberId,
           memberId: data[0].memberId,
           membername: data[0].memberName,
-  
         })
-        this.props.saveMemberID(userName, data[0].memberName)
+        console.log("THIS IS MEMBERID", this.state.memberId)
+        // this.props.saveMemberID(data[0].memberId)
         
         
       }
@@ -119,7 +117,9 @@ class Signin extends Component {
   render() {
     if (this.state.redirect) {
       // this.props.saveMemberID(UsermemberID)
-      return <Redirect to='/search' />
+      return (
+        <Redirect to='/search' memberId={this.state.memberId}/>
+      )
     }    
     return (
       <div>            
@@ -127,7 +127,7 @@ class Signin extends Component {
           <div className="card card-body">
             {/* <div id="message"></div> */}
             <div id ="message">{this.message}</div>
-            <h5 className="text-center mb-3">Sign In</h5>
+            <h5>Sign In</h5>
             <form className="form-groups">          
               <div className="form-group">
                 <label id="username"></label>
@@ -159,8 +159,10 @@ class Signin extends Component {
           <span>
             <Button 
               type="submit" onClick={this.signInSubmit} color="info" size="sm">Sign In
-            </Button>{" "}         
-            No Account? <a href="/Getstarted">Create Account</a>
+            </Button>{" "}
+                     
+            <p>No Account? <a href="/Getstarted">Create Account</a></p>
+            <p><a href="/Getstarted">Forget Email/Password?</a></p>
           </span>
         </div>
           </div>

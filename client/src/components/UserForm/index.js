@@ -8,7 +8,7 @@ function UserForm(props) {
   return (
     <div className="card card-body">
       <div id="message"></div>
-      <h5 className="text-center mb-3">Create Account</h5>
+      <h5>Create Account</h5>
         <form className="form-groups">
           <div className="form-group">
             <label htmlFor="membername"></label>
@@ -62,9 +62,9 @@ function UserForm(props) {
         <div className="getstarted">
           <span>
             <Button 
-              type="submit" onClick={props.handleFormSubmit} color="info" size="sm">Create Account
-            </Button>{" "}         
-            Have An Account? <a href="/Signin/">Sign In</a>
+              type="submit" onClick={props.handleFormSubmit} color="info" size="sm">Sign Up
+            </Button>        
+            <p>Have An Account? <a href="/Signin/">Sign On</a></p>
           </span>
         </div>
     </div>

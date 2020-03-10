@@ -21,7 +21,7 @@ function SearchResults(props) {
     <Row>
       <div className="book-row-display">        
           {props.books.map(result => (   
-            <Col key={result.etag} md="4">
+            <Col key={result.etag} md="3">
                 <Card className="book-card">
                     <CardHeader className="book-card-header"><b>Title :</b> {result.volumeInfo.title = truncateString(result.volumeInfo.title, 40)} </CardHeader>
                     <div className="img-container">

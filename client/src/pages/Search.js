@@ -12,7 +12,8 @@ class Search extends Component {
   state = {
     search: "",
     favMessage:"",
-    id: "",      
+    id: "",
+    memberId: null,      
     books: [],    
     title: "",
     authors: "",
@@ -50,9 +51,7 @@ class Search extends Component {
     // this.props.bookDetails(this.state.showBook)       
   };
 
-  // bookDetails = () => {
-
-  // }
+  
   renderRedirect = () => {
     if (this.state.redirect) {      
       return <Redirect to='/BookDetails' showBook={this.state.showBook}/>
@@ -66,6 +65,17 @@ class Search extends Component {
     console.log("THIS IS SEARCH", this.state.search)
     this.setState({showBookImage: false});
   };
+
+  saveMemberID = (memberId) => {   
+    
+    this.setState({      
+      memberId: memberId,
+     
+    })
+    console.log("THIS IS MEMBERID IN SEARCH", this.state.memberId)
+    // this.getMemberInfo()
+  }
+
   
   favoriteSubmit = (id) => {
     // var bookThumbnail =" "
@@ -97,6 +107,7 @@ class Search extends Component {
     let bookAuthors = String(book.volumeInfo.authors)
     let bookLink = String(book.volumeInfo.infoLink)
     let bookNote = ""
+    let bookMember = "femoo@msn.com"
   
 
     function truncateString(str, num) {    
@@ -109,12 +120,13 @@ class Search extends Component {
       }    
     }
 
-    bookAuthors = truncateString(bookAuthors, 10); 
+    bookAuthors = truncateString(bookAuthors, 22); 
     bookDescription = truncateString(bookDescription, 1780);
     bookTitle = truncateString(bookTitle, 40); 
 
     API.saveBook({
       bookid: bookId,
+      bookmember: bookMember,
       title: bookTitle,
       authors: bookAuthors,
       link: bookLink,
@@ -131,17 +143,17 @@ class Search extends Component {
  
   render() {
     // console.log('this.state.showBook', this.state.showBook)
-    const {showBookState, showBook, showBookImage} = this.state
+    const {showBookState, showBook, showBookImage, memberId} = this.state
 
     return (
       <div>
         {/* {this.renderRedirect()} */}
-        <Container style={{ minHeight: "80%", width: "100%" }}>          
+        <Container style={{ minHeight: "100%", width: "100%" }}>          
           
           {showBookState === true ? [] : <SearchForm
             search={this.state.search}
             handleFormSubmit={this.handleFormSubmit}
-            handleInputChange={this.handleInputChange}            
+            handleInputChange={this.handleInputChange} memberId={this.memberId}           
           />}
           
           {!showBookState ? <SearchResults books={this.state.books === undefined ? [] : this.state.books}
