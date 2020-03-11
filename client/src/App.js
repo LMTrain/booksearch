@@ -36,7 +36,7 @@ function App() {
           <Route exact path="/Favorite" component={Favorite} />      
           <Route exact path="/search" component={Search} />
           <Route exact path="/Getstarted" component={GetStarted} />   
-          <Route exact path="/Signin" component={Signin}/>
+          <Route exact path="/Signin" component={Signin} />
           <Route exact path="/Sign out" render = { () => <About/>}/>
           {/* <Route exact path="/Signin" render = { () => <Signin saveMemberID={this.saveMemberID} />}/> */}
           {/* <Route exact path="/Getstarted" render = { () => <GetStarted saveMemberID={this.saveMemberID} />}/>           */}

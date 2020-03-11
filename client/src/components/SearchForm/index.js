@@ -2,6 +2,7 @@ import React from "react";
 import "./style.css";
 import { Button } from 'reactstrap';
 
+
 // Using the datalist element we can create autofill suggestions based on the props.breeds array
 function SearchForm(props) { 
   return (
@@ -31,9 +32,14 @@ function SearchForm(props) {
               </button>
             </span>
           </div>
-          <Button color="info" size="sm" 
-            href="/Favorite/">My Favorites
-          </Button>    
+          { props.memberId === undefined ? [] :
+            <>
+              <Button color="info" size="sm" 
+                onClick={props.renderRedirect} >My Favorites
+              </Button>    
+            </>
+          }
+          
         </form>
       </span>
     </span>

@@ -4,15 +4,15 @@ import { Redirect } from "react-router-dom";
 import "./style.css";
 import API from "../utils/API";
 import { Button } from 'reactstrap';
+import Search from "./Search";
 
 
-var UsermemberID = ""
+
 class Signin extends Component {
-  state = {
-    memberId: null,
+  state = {    
     user:{},
     membername: "",
-    userName: "",
+    userName: null,
     memberpassword: "",  
     redirect: false,
     isError: false,
@@ -65,7 +65,7 @@ class Signin extends Component {
    
     let userName = String(userAccount.memberemail)   
     let password = String(userAccount.memberpassword)
-    UsermemberID = String(userAccount.memberemail)
+   
     API.loginUser({     
       userName: userName,      
       password: password,
@@ -99,11 +99,10 @@ class Signin extends Component {
     
         this.setState({
           redirect: true,
-          userName: data[0].memberId,
-          memberId: data[0].memberId,
+          userName: data[0].memberId,          
           membername: data[0].memberName,
         })
-        console.log("THIS IS MEMBERID", this.state.memberId)
+        console.log("THIS IS MEMBERID", this.state.userName)
         // this.props.saveMemberID(data[0].memberId)
         
         
@@ -115,58 +114,63 @@ class Signin extends Component {
 
 
   render() {
-    if (this.state.redirect) {
-      // this.props.saveMemberID(UsermemberID)
-      return (
-        <Redirect to='/search' memberId={this.state.memberId}/>
-      )
-    }    
+    // if (this.state.redirect) {
+    //   // this.props.saveMemberID(UsermemberID)
+    //   return (
+    //     <Redirect to='/search' memberId={this.state.userName}/>
+    //   )
+    // }    
     return (
-      <div>            
-        <Container style={{ marginTop: 80 }}>
-          <div className="card card-body">
-            {/* <div id="message"></div> */}
-            <div id ="message">{this.message}</div>
-            <h5>Sign In</h5>
-            <form className="form-groups">          
-              <div className="form-group">
-                <label id="username"></label>
-                <input 
-                  value={this.memberemail}
-                  onChange={this.handleInputChange}
-                  name="memberemail"
-                  type="text"
-                  className="form-control"  
-                  placeholder="Enter Your Email"
-                  id="memberemail"
-                  />
-              </div>
-              <div className="form-group">
-                <label id="password"></label>
-                <input 
-                  value={this.memberpassword}
-                  onChange={this.handleInputChange}
-                  name="memberpassword"
-                  type="password" 
-                  className="form-control" 
-                  placeholder="Enter User Password"
-                  id="memberpassword" 
-                  />
-              </div>
-              
-            </form>            
-            <div className="getstarted">
-          <span>
-            <Button 
-              type="submit" onClick={this.signInSubmit} color="info" size="sm">Sign In
-            </Button>{" "}
-                     
-            <p>No Account? <a href="/Getstarted">Create Account</a></p>
-            <p><a href="/Getstarted">Forget Email/Password?</a></p>
-          </span>
-        </div>
+      <div>
+        { this.state.userName !== null ? [] :
+          <Container style={{ marginTop: 80 }}>
+            <div className="card card-body">
+              {/* <div id="message"></div> */}
+              <div id ="message">{this.message}</div>
+              <h5>Sign In</h5>
+              <form className="form-groups">          
+                <div className="form-group">
+                  <label id="username"></label>
+                  <input 
+                    value={this.memberemail}
+                    onChange={this.handleInputChange}
+                    name="memberemail"
+                    type="text"
+                    className="form-control"  
+                    placeholder="Enter Your Email"
+                    id="memberemail"
+                    />
+                </div>
+                <div className="form-group">
+                  <label id="password"></label>
+                  <input 
+                    value={this.memberpassword}
+                    onChange={this.handleInputChange}
+                    name="memberpassword"
+                    type="password" 
+                    className="form-control" 
+                    placeholder="Enter User Password"
+                    id="memberpassword" 
+                    />
+                </div>
+                
+              </form>            
+              <div className="getstarted">
+            <span>
+              <Button 
+                type="submit" onClick={this.signInSubmit} color="info" size="sm">Sign In
+              </Button>{" "}
+                      
+              <p>No Account? <a href="/Getstarted">Create Account</a></p>
+              <p><a href="/Getstarted">Forget Email/Password?</a></p>
+            </span>
           </div>
-        </Container>
+            </div>
+          </Container>
+        }            
+        {this.state.userName === null || this.state.userName === undefined ? [] : <Search          
+            userName={this.state.userName}         
+          />}
       </div>
     );
   }

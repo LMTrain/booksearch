@@ -11,18 +11,17 @@ import { Card, CardHeader, CardBody, Button, Row, Col} from 'reactstrap';
 
 
 
-var favBookNote = []
+
 class Favorite extends Component {
   state = {
     book: {},
     favBooks: [],
     favBookNote: [],
     note: "",
+    memberId: this.props.memberId,
     isOpen: false   
   };
-  // this.state.handleToggle  = this.handleToggle.bind(this);
-//HERE IS JUST TO TYPE FOR GITHUB
-  // When the component mounts, get a list of all Favorite books in DB and update this.state.
+ 
   componentWillMount() {  
     this.loadBooks();
   }
@@ -36,19 +35,7 @@ class Favorite extends Component {
       // console.log("THIS IS FAVBOOKS", favBooks)
       .catch(err => console.log(err));
   };
-
-  loadFavBooks = (id) => {
-    const bookNote = this.state.book.find((bookNote) => bookNote._id === id);
-    // // console.log('fav Book', book)
-    // this.setState({ favBookNote : bookNote})
-    // favBookNote = this.state.favBookNote;
-    console.log("THIS IS DATE")
-    favBookNote = bookNote    
-    console.log("THIS IS FAVBOOKS", favBookNote);
-    console.log("THIS IS BOOK ID", favBookNote._id )
-    this.renderDetailModal();
-  };
-    
+  
 
   handleInputChange = event => {
     const note = event.target.name;
@@ -61,13 +48,8 @@ class Favorite extends Component {
    
   };
 
-  handleFormSubmit = event => {
-    console.log(event)
+  handleFormSubmit = event => {   
     event.preventDefault();
-    this.addNote(favBookNote._id);
-    console.log("THIS IS NOTE", this.state.note)
-    // this.setState({note : value})    
-    // this.addNote(id);
   };
 
   addNote = (id) => {
@@ -101,11 +83,7 @@ class Favorite extends Component {
         isOpen: !this.state.isOpen
     });
   }
-
-  renderDetailModal() {
-    
-    console.log("THIS IS favBookNote", favBookNote);    
-  }    
+  
 
   render() {    
     return (
@@ -120,10 +98,8 @@ class Favorite extends Component {
             {this.state.book.length ? (
               <div className="book-row-display">
                 {this.state.book.map(book => (
-                  <Col key={book._id} md="3">
-                   {/* <span> */}
-                    <span onClick={() => this.loadFavBooks(book._id)}>                  
-                      {/* <BookCardDetail toggle={this.handleToggle} book={book} isOpen/> */}
+                  <Col key={book._id} md="3">                  
+                    {/* <span onClick={() => this.loadFavBooks(book._id)}> */}
                       <Card className="book-card">                    
                         <CardHeader className="book-card-header">
                           <Row>
@@ -147,7 +123,7 @@ class Favorite extends Component {
                         />
                         </div>
                         <CardBody className="content"> 
-                <p><b>Authors :</b>{" "}{book.authors}</p>
+                          <p><b>Authors :</b>{" "}{book.authors}</p>
                           <p><b>Published Date :</b> {book.publisheddate}</p>                         
                           <span>
                           {/* <form className="note">
@@ -184,14 +160,13 @@ class Favorite extends Component {
 
                         </span>                                       
                       </Card>                                          
-                    </span>                       
+                    {/* </span>                        */}
                   </Col>
                 ))}
               </div>
                   ) : (
-                    <h2>Loading...</h2>
+                    <h5>Loading...</h5>
                   )}
-           
         </Row>      
         </Container>
       </div>

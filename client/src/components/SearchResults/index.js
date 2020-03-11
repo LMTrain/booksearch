@@ -39,7 +39,14 @@ function SearchResults(props) {
                   <span>
                     <button id={result.etag}type="submit" onClick={() => props.handleDetailsSubmit(result.id)} className="btn btn-success">Detail</button>  
                    
-                    <button id={result.etag} type="submit" onClick={() => props.favoriteSubmit(result.id)} className="btn btn-success">Add to Favorite</button>
+                    {/* <button id={result.etag} type="submit" onClick={() => props.favoriteSubmit(result.id)} className="btn btn-success">Add to Favorite</button> */}
+                    { props.memberId === null || props.memberId === undefined ? [] :
+                      <>
+                        <button  
+                          id={result.etag} type="submit" onClick={() => props.favoriteSubmit(result.id)} className="btn btn-success">Add to Favorite
+                        </button>    
+                      </>
+                    }
                   </span>
                 </Card>
               </Col>

@@ -6,14 +6,23 @@ import SearchResults from "../components/SearchResults";
 import Details from "../components/Details";
 import SearchBookImage from "../components/SearchBookImage";
 import { Redirect } from "react-router-dom";
+import Favorite from "./Favorite";
 
+
+
+
+// getInitialProps(userInfo) {
+//   console.log(userInfo);
+//   return {userInfo};
+// }
 
 class Search extends Component {
+  
   state = {
     search: "",
     favMessage:"",
     id: "",
-    memberId: null,      
+    memberId: this.props.userName,      
     books: [],    
     title: "",
     authors: "",
@@ -26,9 +35,11 @@ class Search extends Component {
     detailsFavBook: [],
     showBookState: false,
     showBookImage: true,
+    showFavBooks: false,
     redirect: false,
   };
-  
+
+    
   searchForBooks = query => {
     API.search(query)
       .then(res => this.setState({ books: res.data.items }))         
@@ -53,9 +64,10 @@ class Search extends Component {
 
   
   renderRedirect = () => {
-    if (this.state.redirect) {      
-      return <Redirect to='/BookDetails' showBook={this.state.showBook}/>
-    }
+    this.setState({showFavBooks: true, showBookImage: false, showBookState: true});
+    // if (this.state.redirect === true) {      
+    //   return <Redirect to='/Favorite' memberId={this.state.memberId}/>
+    // }
   };
 
   handleFormSubmit = event => {
@@ -63,18 +75,18 @@ class Search extends Component {
     event.preventDefault();
     this.searchForBooks(this.state.search);
     console.log("THIS IS SEARCH", this.state.search)
-    this.setState({showBookImage: false});
+    this.setState({showBookImage: false, showFavBooks: false});
   };
 
-  saveMemberID = (memberId) => {   
+  // saveMemberID = (mId) => {   
     
-    this.setState({      
-      memberId: memberId,
+  //   this.setState({      
+  //     memberId: mId,
      
-    })
-    console.log("THIS IS MEMBERID IN SEARCH", this.state.memberId)
-    // this.getMemberInfo()
-  }
+  //   })
+  //   console.log("THIS IS MEMBERID IN SEARCH", this.state.memberId)
+  //   // this.getMemberInfo()
+  // }
 
   
   favoriteSubmit = (id) => {
@@ -107,7 +119,7 @@ class Search extends Component {
     let bookAuthors = String(book.volumeInfo.authors)
     let bookLink = String(book.volumeInfo.infoLink)
     let bookNote = ""
-    let bookMember = "femoo@msn.com"
+    let bookMember = String(this.state.memberId)
   
 
     function truncateString(str, num) {    
@@ -143,8 +155,8 @@ class Search extends Component {
  
   render() {
     // console.log('this.state.showBook', this.state.showBook)
-    const {showBookState, showBook, showBookImage, memberId} = this.state
-
+    const {showBookState, showBook, showBookImage, showFavBooks} = this.state
+    
     return (
       <div>
         {/* {this.renderRedirect()} */}
@@ -153,18 +165,23 @@ class Search extends Component {
           {showBookState === true ? [] : <SearchForm
             search={this.state.search}
             handleFormSubmit={this.handleFormSubmit}
-            handleInputChange={this.handleInputChange} memberId={this.memberId}           
+            handleInputChange={this.handleInputChange} 
+            renderRedirect={this.renderRedirect}
+            memberId={this.state.memberId}           
           />}
           
           {!showBookState ? <SearchResults books={this.state.books === undefined ? [] : this.state.books}
           favoriteSubmit={this.favoriteSubmit}         
           handleDetailsSubmit={this.handleDetailsSubmit}
-          
-          
-          /> : <Details showBook={showBook} favoriteSubmit={this.favoriteSubmit}/>}
+          memberId={this.state.memberId}          
+          /> 
+          : <Details showBook={showBook} favoriteSubmit={this.favoriteSubmit} memberId={this.state.memberId}/>}
           {showBookImage === false ? [] : <SearchBookImage />}         
          
         </Container>
+        {showFavBooks === false ? [] : 
+          <Favorite memberId={this.state.memberId}/>
+        }
       </div>
       
     );

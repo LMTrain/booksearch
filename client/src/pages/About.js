@@ -20,7 +20,7 @@ function About() {
         <Row>
           <Col size="md-12">
             <p>
-            LM Books Search uses Google API's for book searching to searches the full text of books and magazines that Google has scanned, converted to text using optical character recognition (OCR), and stored in its digital database. Books are provided either by publishers and authors through the Google Books Partner Program, or by Google's library partners through the Library Project. Additionally, Google has partnered with a number of magazine publishers to digitize their archives.
+            LM Books Search, uses Google API's for book searching. It searches the full text of books and magazines that Google has scanned, converted to text using optical character recognition (OCR), and stored its digital database. Books are provided either by publishers and authors through the Google Books Partner Program, or by Google's library partners through the Library Project. Additionally, Google has partnered with a number of magazine publishers to digitize their archives.
             </p>
             <p>
             
