@@ -5,16 +5,10 @@ import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
 import Details from "../components/Details";
 import SearchBookImage from "../components/SearchBookImage";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import Favorite from "./Favorite";
 
 
-
-
-// getInitialProps(userInfo) {
-//   console.log(userInfo);
-//   return {userInfo};
-// }
 
 class Search extends Component {
   
@@ -36,6 +30,7 @@ class Search extends Component {
     showBookState: false,
     showBookImage: true,
     showFavBooks: false,
+    showSearchForm: true,
     redirect: false,
   };
 
@@ -56,18 +51,37 @@ class Search extends Component {
 
   handleDetailsSubmit = (id) => {  
     // Find the id in the state
-    const book = this.state.books.find((book) => book.id === id);
-    // console.log('found Book', book)
-    this.setState({showBook: [book], detailsFavBook: [book], showBookState: true, showBookImage: false, redirect: true})
-    // this.props.bookDetails(this.state.showBook)       
+    const book = this.state.books.find((book) => book.id === id);    
+    this.setState({showBook: [book], 
+                  detailsFavBook: [book], 
+                  showBookState: true, 
+                  showBookImage: false,
+                  showSearchForm: false,
+                  showFavBooks: false,
+                  redirect: true
+                })
+          
   };
-
   
+
   renderRedirect = () => {
-    this.setState({showFavBooks: true, showBookImage: false, showBookState: true});
+    this.setState({showBookState: false,
+                    showBookImage: true,
+                    showFavBooks: false,
+                    showSearchForm: true,
+                  });
     // if (this.state.redirect === true) {      
     //   return <Redirect to='/Favorite' memberId={this.state.memberId}/>
     // }
+    this.showFavoriteBooks();
+  };
+
+  showFavoriteBooks = () => {
+    this.setState({showFavBooks: true, 
+                    showBookImage: false,
+                    showSearchForm: false, 
+                    showBookState: false
+                  });
   };
 
   handleFormSubmit = event => {
@@ -75,27 +89,22 @@ class Search extends Component {
     event.preventDefault();
     this.searchForBooks(this.state.search);
     console.log("THIS IS SEARCH", this.state.search)
-    this.setState({showBookImage: false, showFavBooks: false});
+    this.setState({showBookImage: false,
+                    showBookState: false, 
+                    showFavBooks: false
+                  });
   };
 
-  // saveMemberID = (mId) => {   
-    
-  //   this.setState({      
-  //     memberId: mId,
-     
-  //   })
-  //   console.log("THIS IS MEMBERID IN SEARCH", this.state.memberId)
-  //   // this.getMemberInfo()
-  // }
-
   
-  favoriteSubmit = (id) => {
-    // var bookThumbnail =" "
+  favoriteSubmit = (id) => {    
     const book = this.state.books.find((book) => book.id === id);   
-    this.setState({showBook: [book], showBookState: false})
-    // console.log("FAV BOOK", book)
-    // console.log("IMAGE URL", book.volumeInfo.imageLinks)
-
+    this.setState({showBook: [book], 
+                    showFavBooks: false, 
+                    showBookImage: false,
+                    showSearchForm: true, 
+                    showBookState: false
+                  })
+                  
      if (book.volumeInfo.imageLinks === undefined) {
       var bookThumbnail = 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg'
     } else {
@@ -152,36 +161,74 @@ class Search extends Component {
     
   };
 
+  backToSearch = () => {
+    this.setState({showFavBooks: false, 
+                    showBookImage: false,
+                    showSearchForm: true, 
+                    showBookState: false
+                  });
+  }
  
-  render() {
-    // console.log('this.state.showBook', this.state.showBook)
-    const {showBookState, showBook, showBookImage, showFavBooks} = this.state
-    
-    return (
+  render() {   
+    const {showBookState, showBook, showBookImage, showFavBooks, showSearchForm} = this.state
+    console.log("THIS IS SHOWBOOKSTATE STATUS", !showBookState)
+    return (      
       <div>
-        {/* {this.renderRedirect()} */}
+       
         <Container style={{ minHeight: "100%", width: "100%" }}>          
           
-          {showBookState === true ? [] : <SearchForm
-            search={this.state.search}
-            handleFormSubmit={this.handleFormSubmit}
-            handleInputChange={this.handleInputChange} 
-            renderRedirect={this.renderRedirect}
-            memberId={this.state.memberId}           
-          />}
+          { showBookImage === true && 
+            showBookState === false && 
+            showFavBooks === false &&
+            showSearchForm === true ? 
+            <SearchForm
+              search={this.state.search}
+              handleFormSubmit={this.handleFormSubmit}
+              handleInputChange={this.handleInputChange} 
+              renderRedirect={this.renderRedirect}
+              memberId={this.state.memberId}           
+            /> : []
+          }
+                   
+          { !showBookState && 
+            showFavBooks === false &&
+            showBookImage === false &&
+            showSearchForm === true ?
+            
+              <SearchResults 
+                books={this.state.books === undefined ? [] : this.state.books}
+                favoriteSubmit={this.favoriteSubmit}         
+                handleDetailsSubmit={this.handleDetailsSubmit}
+                memberId={this.state.memberId}          
+              /> : [] 
+                    
+          }
+        
+
+          { showBookImage === false && 
+            showBookState === true && 
+            showFavBooks === false &&
+            showSearchForm === false ? 
+            <Details 
+              showBook={showBook} 
+              favoriteSubmit={this.favoriteSubmit} 
+              backToSearch={this.backToSearch} 
+              memberId={this.state.memberId}
+            /> : [] 
+          }
           
-          {!showBookState ? <SearchResults books={this.state.books === undefined ? [] : this.state.books}
-          favoriteSubmit={this.favoriteSubmit}         
-          handleDetailsSubmit={this.handleDetailsSubmit}
-          memberId={this.state.memberId}          
-          /> 
-          : <Details showBook={showBook} favoriteSubmit={this.favoriteSubmit} memberId={this.state.memberId}/>}
           {showBookImage === false ? [] : <SearchBookImage />}         
          
         </Container>
-        {showFavBooks === false ? [] : 
-          <Favorite memberId={this.state.memberId}/>
+        { showBookImage === false && 
+          showBookState === true && 
+          showFavBooks === true &&
+          showSearchForm === false ? 
+          <Favorite 
+            memberId={this.state.memberId}
+          /> : []
         }
+
       </div>
       
     );

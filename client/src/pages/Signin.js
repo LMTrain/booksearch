@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Container from "../components/Container";
-import { Redirect } from "react-router-dom";
 import "./style.css";
 import API from "../utils/API";
 import { Button } from 'reactstrap';
@@ -113,17 +112,11 @@ class Signin extends Component {
   };
 
 
-  render() {
-    // if (this.state.redirect) {
-    //   // this.props.saveMemberID(UsermemberID)
-    //   return (
-    //     <Redirect to='/search' memberId={this.state.userName}/>
-    //   )
-    // }    
+  render() {    
     return (
       <div>
         { this.state.userName !== null ? [] :
-          <Container style={{ marginTop: 80 }}>
+          <Container style={{ minHeight: "100%", width: "100%", marginTop: 80 }}>
             <div className="card card-body">
               {/* <div id="message"></div> */}
               <div id ="message">{this.message}</div>

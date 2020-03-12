@@ -5,7 +5,7 @@ import UserForm from "../components/UserForm";
 import { Redirect } from "react-router-dom";
 
 
-var UsermemberID = ""
+
 class GetStarted extends Component {
   state = {
     memberId: "",
@@ -76,10 +76,9 @@ class GetStarted extends Component {
       memberemail,
       memberpassword,
       confirmpassword
-    }
-    
+    }    
  
-    UsermemberID = String(newAccount.memberemail)
+    
     let memberId = String(newAccount.memberemail)
     let memberName = String(newAccount.membername)
     let userName = String(newAccount.memberemail)
