@@ -34,9 +34,11 @@ function SearchForm(props) {
           </div>
           { props.memberId === undefined ? [] :
             <>
-              <Button color="info" size="sm" 
-                onClick={props.renderRedirect} >My Favorites
-              </Button>    
+              <div className="menu-bar">
+                <Button type="submit" onClick={() => props.signOut()}color="info" size="sm">Sign Out</Button>{" "}
+                <Button type="submit" onClick={() => props.backToSearch()} color="info" size="sm">Add More Books</Button>{" "}
+                <Button color="info" size="sm" onClick={props.renderRedirect} >My Favorites</Button>  
+              </div>         
             </>
           }
           

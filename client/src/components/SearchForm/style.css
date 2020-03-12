@@ -9,8 +9,13 @@ form.search {
   color: #fff;
   background-color: #17a2b8;
   border-color: #17a2b8;
-  height: 40px;
-  margin-top: 15px;
+  height: 40px;  
+}
+
+.menu-bar {
+  width: 500px;
+  padding: 4px;
+  margin-right: 150px;
 }
 
 form.search button[type="submit"] {
@@ -19,6 +24,7 @@ form.search button[type="submit"] {
   border-radius: .95rem;
   font-size: small;
   box-shadow: 0 2px 2px #999, 0 2px 2px #999;
+  margin-left: 10px;
 }
 
 .form-control {
@@ -43,8 +49,7 @@ form.search button[type="submit"] {
 
 .search-form-group {
   display: flex;
-  flex-direction: row;
-  margin-top: 17px;
+  flex-direction: row; 
   margin-left: -1px;
   height: 40px; 
   width: 1000px;   

@@ -6,6 +6,7 @@ import Container from "../components/Container";
 // import Row from "../components/Row";
 // import Col from "../components/Col";
 import { Card, CardHeader, CardBody, Button, Row, Col} from 'reactstrap';
+import { Link } from "react-router-dom";
 // import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 // import moment from 'moment';
 
@@ -13,13 +14,13 @@ import { Card, CardHeader, CardBody, Button, Row, Col} from 'reactstrap';
 
 var mId ="";
 var allUsersBooks = [];
-// var booksFind = []
+// var userFavBooks = 0,
 class Favorite extends Component {
     state = {
     book: {},
     userBooks: [],
     favBooks: [],
-    favBookNote: [],
+    userfavBooksCount: 0,
     note: "",
     memberId: this.props.memberId,
     isOpen: false   
@@ -30,74 +31,32 @@ class Favorite extends Component {
     this.loadBooks();
   }
 
-  // loadBooks = () => {
-  //   const app = this;
-  //   API.getBooks()
-  //     .then(function(res){
-  //       return new Promise(function(resolve, reject){
-  //         app.setState({book: res.data})
-  //         resolve(true);
-  //       })
-  //     }).then(function(){
-  //       console.log(app.state.book)
-  //     })      
-  //     .catch(err => console.log(err));     
-  //     console.log(this.state.book)
-  //     this.findUserBooks(mId)
-  // };
   loadBooks = () => {
     API.getBooks()
       .then(res => {        
         this.setState({ book: res.data, id: "", title: "", authors: "", link: "", thumbnail: "", description: "", publisheddate: "", note: "",})
-        // console.log("THIS IS FAVBOOKS", res.data)
-        // console.log("THIS IS STATE", this.state.book)
+        
         allUsersBooks = [...res.data]
         console.log("THIS IS ALLUSERSBOOKS", allUsersBooks)
         this.setState({favBooks: [allUsersBooks]})
         console.log("THIS IS STATE FAV BOOKS", this.state.favBooks)
         console.log("THIS IS MID", mId)
         let booksFind = [];
+        var userFavBooks = 0;
         for (let i = 0;  i < allUsersBooks.length; i++) {      
           if (allUsersBooks[i].bookmember === mId) {
-              booksFind.push(allUsersBooks[i])                
-              this.setState({userBooks:booksFind})
+              booksFind.push(allUsersBooks[i])
+              userFavBooks = userFavBooks + 1;            
+              this.setState({userBooks:booksFind, userfavBooksCount: userFavBooks})
             }
-          }
-          // console.log("THIS IS BOOKSFIND", booksFind )
+          }          
           console.log("THIS IS USERSBOOKS", this.state.userBooks) 
-        // var data = [allUsersBooks];
-        // data = data.filter(function (item) {
-        //   return !item.string(mId);
-        // });
-        // console.log(data);
-        // this.findUserBooks(mId)
+        
       }
       )      
       // console.log("THIS IS FAVBOOKS", this.state.book)
       .catch(err => console.log(err));
   };
-
-  // findUserBooks = (mId) => {
-  //   // const app = this;
-  //   console.log("THIS IS MID", mId)
-    
-  //   // allUsersBooks = [...this.state.book]
-  //   console.log("THIS IS ALLUSERSBOOKS", allUsersBooks)
-  //   for (var i = 0;  i < allUsersBooks.length; i++) {
-          
-  //     if (mId !== allUsersBooks[i].bookmember) {
-  //       }else{
-          
-  //         booksFind.push([allUsersBooks[i]])                
-  //         this.setState({userBooks:booksFind})
-  //       }          
-  //     }    
-  //     console.log("THIS IS USERSBOOKS", this.state.userBooks)
-  //     console.log(this.state.userBooks[1][0].title)
-  //   }
-   
-  
-  
 
   handleInputChange = event => {
     const note = event.target.name;
@@ -143,7 +102,8 @@ class Favorite extends Component {
   
   
 
-  render() {    
+  render() { 
+    const {userfavBooksCount} = this.state;
     return (
       <div>
        
@@ -153,7 +113,14 @@ class Favorite extends Component {
               <h3 className="text-center">My Favorite Books</h3> 
             </Col>
           </Row>
-          <Container>        
+          <Container> 
+            <Row>
+              <Col className="fav-menu-bar">
+    <Button color="info" size="sm" onClick={this.props.renderRedirect} ><b>{userfavBooksCount}</b>{" "}Favorites</Button>{" "}    
+              <Button type="submit" onClick={() => this.props.backToSearch()} color="info" size="sm">Add More Books</Button>{" "}
+              <Link to="/"><Button type="submit" color="info" size="sm">Sign Out</Button></Link>
+              </Col>
+            </Row>       
               {this.state.userBooks.length ? (
                 <div className="book-row-display">
                   {this.state.userBooks.map(book => (

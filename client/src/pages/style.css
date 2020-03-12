@@ -106,6 +106,12 @@ ul.search-results img {
   /* margin-left:50px; */
 }
 
+.fav-menu-bar {
+  width: 500px;
+  padding: 5px;
+  margin-left: 630px;
+}
+
 .container {
   width: 100%;
   padding-right: 15px;

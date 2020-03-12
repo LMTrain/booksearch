@@ -7,6 +7,7 @@ import Details from "../components/Details";
 import SearchBookImage from "../components/SearchBookImage";
 import { Row, Col } from 'reactstrap';
 import Favorite from "./Favorite";
+import { Redirect } from "react-router-dom";
 
 
 
@@ -166,6 +167,13 @@ class Search extends Component {
                     showBookState: false
                   });
   }
+
+  signOut = () => {
+    this.setState({ redirect: true})
+    if (this.state.redirect) {       
+      return <Redirect to='/' />
+    }
+  }
  
   render() {   
     const {showBookState, showBook, showBookImage, showFavBooks, showSearchForm} = this.state
@@ -174,14 +182,14 @@ class Search extends Component {
       <div>
         
           <Container style={{ minHeight: "100%", width: "100%" }}>
-          <Row>
+          {/* <Row>
           <Col md="5">
             <span>
               <button type="submit" onClick={() => this.backToSearch()} className="btn btn-success">Add More Books</button>
-              <button type="submit" onClick={() => this.backToSearch()} className="btn btn-success">Sign Out</button>
+              <button type="submit" onClick={() => this.signOut()} className="btn btn-success">Sign Out</button>
             </span>
           </Col> 
-          </Row>          
+          </Row>           */}
             
             { showBookImage === true && 
               showBookState === false && 
@@ -192,6 +200,7 @@ class Search extends Component {
                   handleFormSubmit={this.handleFormSubmit}
                   handleInputChange={this.handleInputChange} 
                   renderRedirect={this.renderRedirect}
+                  backToSearch={this.backToSearch}
                   memberId={this.state.memberId}           
                 /> : []
             }
@@ -205,6 +214,7 @@ class Search extends Component {
                 handleFormSubmit={this.handleFormSubmit}
                 handleInputChange={this.handleInputChange} 
                 renderRedirect={this.renderRedirect}
+                backToSearch={this.backToSearch}
                 memberId={this.state.memberId}           
               /> : []
             }
@@ -245,6 +255,8 @@ class Search extends Component {
               <Favorite
                 memberId={this.state.memberId}
                 backToSearch={this.backToSearch} 
+                renderRedirect={this.renderRedirect}
+                signOut={this.signOut}
               /> : []
           }
           </Container>
