@@ -84,11 +84,9 @@ class Search extends Component {
                   });
   };
 
-  handleFormSubmit = event => {
-    console.log(event)
+  handleFormSubmit = event => {   
     event.preventDefault();
-    this.searchForBooks(this.state.search);
-    console.log("THIS IS SEARCH", this.state.search)
+    this.searchForBooks(this.state.search);  
     this.setState({showBookImage: false,
                     showBookState: false, 
                     showFavBooks: false
@@ -171,7 +169,7 @@ class Search extends Component {
  
   render() {   
     const {showBookState, showBook, showBookImage, showFavBooks, showSearchForm} = this.state
-    console.log("THIS IS SHOWBOOKSTATE STATUS", !showBookState)
+    
     return (      
       <div>
        
@@ -181,7 +179,20 @@ class Search extends Component {
             showBookState === false && 
             showFavBooks === false &&
             showSearchForm === true ? 
-            <SearchForm
+              <SearchForm
+                search={this.state.search}
+                handleFormSubmit={this.handleFormSubmit}
+                handleInputChange={this.handleInputChange} 
+                renderRedirect={this.renderRedirect}
+                memberId={this.state.memberId}           
+              /> : []
+          }
+          { !showBookState && 
+            showFavBooks === false &&
+            showBookImage === false &&
+            showSearchForm === true ?
+            
+              <SearchForm
               search={this.state.search}
               handleFormSubmit={this.handleFormSubmit}
               handleInputChange={this.handleInputChange} 
@@ -209,24 +220,24 @@ class Search extends Component {
             showBookState === true && 
             showFavBooks === false &&
             showSearchForm === false ? 
-            <Details 
-              showBook={showBook} 
-              favoriteSubmit={this.favoriteSubmit} 
-              backToSearch={this.backToSearch} 
-              memberId={this.state.memberId}
-            /> : [] 
+              <Details 
+                showBook={showBook} 
+                favoriteSubmit={this.favoriteSubmit} 
+                backToSearch={this.backToSearch} 
+                memberId={this.state.memberId}
+              /> : [] 
           }
           
           {showBookImage === false ? [] : <SearchBookImage />}         
          
         </Container>
         { showBookImage === false && 
-          showBookState === true && 
+          showBookState === false && 
           showFavBooks === true &&
           showSearchForm === false ? 
-          <Favorite 
-            memberId={this.state.memberId}
-          /> : []
+            <Favorite 
+              memberId={this.state.memberId}
+            /> : []
         }
 
       </div>

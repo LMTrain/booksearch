@@ -11,10 +11,13 @@ import { Card, CardHeader, CardBody, Button, Row, Col} from 'reactstrap';
 
 
 
-
+var mId ="";
+var allUsersBooks = [];
+var booksFind = []
 class Favorite extends Component {
-  state = {
+    state = {
     book: {},
+    userBooks: [],
     favBooks: [],
     favBookNote: [],
     note: "",
@@ -22,19 +25,62 @@ class Favorite extends Component {
     isOpen: false   
   };
  
-  componentWillMount() {  
+  componentWillMount() { 
+    mId = this.state.memberId 
     this.loadBooks();
   }
 
+  // loadBooks = () => {
+  //   const app = this;
+  //   API.getBooks()
+  //     .then(function(res){
+  //       return new Promise(function(resolve, reject){
+  //         app.setState({book: res.data})
+  //         resolve(true);
+  //       })
+  //     }).then(function(){
+  //       console.log(app.state.book)
+  //     })      
+  //     .catch(err => console.log(err));     
+  //     console.log(this.state.book)
+  //     this.findUserBooks(mId)
+  // };
   loadBooks = () => {
     API.getBooks()
       .then(res => {        
         this.setState({ book: res.data, id: "", title: "", authors: "", link: "", thumbnail: "", description: "", publisheddate: "", note: "",})
+        console.log("THIS IS FAVBOOKS", res.data)
+        console.log("THIS IS STATE", this.state.book)
+        allUsersBooks = [...res.data]
+        console.log("THIS IS ALLUSERSBOOKS", allUsersBooks)
+        this.setState({favBooks: [allUsersBooks]})
+        this.findUserBooks(mId)
       }
       )      
-      // console.log("THIS IS FAVBOOKS", favBooks)
+      // console.log("THIS IS FAVBOOKS", this.state.book)
       .catch(err => console.log(err));
   };
+
+  findUserBooks = (mId) => {
+    // const app = this;
+    console.log("THIS IS MID", mId)
+    
+    // allUsersBooks = [...this.state.book]
+    console.log("THIS IS ALLUSERSBOOKS", allUsersBooks)
+    for (var i = 0;  i < allUsersBooks.length; i++) {
+          
+      if (mId !== allUsersBooks[i].bookmember) {
+        }else{
+          
+          booksFind.push([allUsersBooks[i]])                
+          this.setState({userBooks:booksFind})
+        }          
+      }    
+      console.log("THIS IS USERSBOOKS", this.state.userBooks)
+      console.log(this.state.userBooks[1][0].title)
+    }
+   
+  
   
 
   handleInputChange = event => {
@@ -73,16 +119,12 @@ class Favorite extends Component {
   }
   
   deleteBook = id => {
+    console.log(id)
     API.deleteBook(id)
       .then(res => this.loadBooks())
       .catch(err => console.log(err));
-  };
+  };  
   
-  handleToggle() {
-    this.setState({
-        isOpen: !this.state.isOpen
-    });
-  }
   
 
   render() {    
@@ -95,20 +137,20 @@ class Favorite extends Component {
           </Col>
         </Row>
         <Row>                   
-            {this.state.book.length ? (
+            {this.state.userBooks.length ? (
               <div className="book-row-display">
-                {this.state.book.map(book => (
-                  <Col key={book._id} md="3">                  
+                {this.state.userBooks.map(book => (
+                  <Col key={book[0].bookid} md="3">                  
                     {/* <span onClick={() => this.loadFavBooks(book._id)}> */}
                       <Card className="book-card">                    
                         <CardHeader className="book-card-header">
                           <Row>
                             <Col md="10">
-                              <b>Title :</b> {book.title}
+                              <b>Title :</b> {book[0].title}
                             </Col>
                             <Col md="2">
                             <span className="delete-button">
-                          <span onClick={() => this.deleteBook(book._id)}><b>X</b></span>
+                          <span onClick={() => this.deleteBook(book[0]._id)}><b>X</b></span>
                             {/* <Button type="submit" onClick={() => this.deleteBook(book._id)} color="danger" size="sm">X</Button> */}
                           </span>
                             </Col>
@@ -118,13 +160,14 @@ class Favorite extends Component {
                         </CardHeader>
                         <div className="img-container">
                         <img
-                          alt={book.title} width="130" height="160"
-                          src={book.thumbnail}
+                          alt={book[0].title} width="130" height="160"
+                          src={book[0].thumbnail}
                         />
                         </div>
                         <CardBody className="content"> 
-                          <p><b>Authors :</b>{" "}{book.authors}</p>
-                          <p><b>Published Date :</b> {book.publisheddate}</p>                         
+                          <p><b>Authors :</b>{" "}{book[0].authors}</p>
+                          <p><b>Published Date :</b> {book[0].publisheddate}</p>
+                          <p>{book[0].bookmember}</p>                        
                           <span>
                           {/* <form className="note">
                             <div className="form-group">
