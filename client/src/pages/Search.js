@@ -5,7 +5,7 @@ import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
 import Details from "../components/Details";
 import SearchBookImage from "../components/SearchBookImage";
-// import { Redirect } from "react-router-dom";
+import { Row, Col } from 'reactstrap';
 import Favorite from "./Favorite";
 
 
@@ -51,7 +51,7 @@ class Search extends Component {
 
   handleDetailsSubmit = (id) => {  
     // Find the id in the state
-    const book = this.state.books.find((book) => book.id === id);    
+    const book = this.state.books.find((book) => book.etag === id);    
     this.setState({showBook: [book], 
                   detailsFavBook: [book], 
                   showBookState: true, 
@@ -95,7 +95,7 @@ class Search extends Component {
 
   
   favoriteSubmit = (id) => {    
-    const book = this.state.books.find((book) => book.id === id);   
+    const book = this.state.books.find((book) => book.etag === id);   
     this.setState({showBook: [book], 
                     showFavBooks: false, 
                     showBookImage: false,
@@ -172,73 +172,84 @@ class Search extends Component {
     
     return (      
       <div>
-       
-        <Container style={{ minHeight: "100%", width: "100%" }}>          
-          
-          { showBookImage === true && 
-            showBookState === false && 
-            showFavBooks === false &&
-            showSearchForm === true ? 
-              <SearchForm
+        
+          <Container style={{ minHeight: "100%", width: "100%" }}>
+          <Row>
+          <Col md="5">
+            <span>
+              <button type="submit" onClick={() => this.backToSearch()} className="btn btn-success">Add More Books</button>
+              <button type="submit" onClick={() => this.backToSearch()} className="btn btn-success">Sign Out</button>
+            </span>
+          </Col> 
+          </Row>          
+            
+            { showBookImage === true && 
+              showBookState === false && 
+              showFavBooks === false &&
+              showSearchForm === true ? 
+                <SearchForm
+                  search={this.state.search}
+                  handleFormSubmit={this.handleFormSubmit}
+                  handleInputChange={this.handleInputChange} 
+                  renderRedirect={this.renderRedirect}
+                  memberId={this.state.memberId}           
+                /> : []
+            }
+            { !showBookState && 
+              showFavBooks === false &&
+              showBookImage === false &&
+              showSearchForm === true ?
+              
+                <SearchForm
                 search={this.state.search}
                 handleFormSubmit={this.handleFormSubmit}
                 handleInputChange={this.handleInputChange} 
                 renderRedirect={this.renderRedirect}
                 memberId={this.state.memberId}           
               /> : []
-          }
-          { !showBookState && 
-            showFavBooks === false &&
-            showBookImage === false &&
-            showSearchForm === true ?
-            
-              <SearchForm
-              search={this.state.search}
-              handleFormSubmit={this.handleFormSubmit}
-              handleInputChange={this.handleInputChange} 
-              renderRedirect={this.renderRedirect}
-              memberId={this.state.memberId}           
-            /> : []
-          }
-                   
-          { !showBookState && 
-            showFavBooks === false &&
-            showBookImage === false &&
-            showSearchForm === true ?
-            
-              <SearchResults 
-                books={this.state.books === undefined ? [] : this.state.books}
-                favoriteSubmit={this.favoriteSubmit}         
-                handleDetailsSubmit={this.handleDetailsSubmit}
-                memberId={this.state.memberId}          
-              /> : [] 
+            }
                     
-          }
-        
-
-          { showBookImage === false && 
-            showBookState === true && 
-            showFavBooks === false &&
-            showSearchForm === false ? 
-              <Details 
-                showBook={showBook} 
-                favoriteSubmit={this.favoriteSubmit} 
-                backToSearch={this.backToSearch} 
-                memberId={this.state.memberId}
-              /> : [] 
-          }
+            { !showBookState && 
+              showFavBooks === false &&
+              showBookImage === false &&
+              showSearchForm === true ?
+              
+                <SearchResults 
+                  books={this.state.books === undefined ? [] : this.state.books}
+                  favoriteSubmit={this.favoriteSubmit}         
+                  handleDetailsSubmit={this.handleDetailsSubmit}
+                  memberId={this.state.memberId}          
+                /> : [] 
+                      
+            }
           
-          {showBookImage === false ? [] : <SearchBookImage />}         
-         
-        </Container>
-        { showBookImage === false && 
-          showBookState === false && 
-          showFavBooks === true &&
-          showSearchForm === false ? 
-            <Favorite 
-              memberId={this.state.memberId}
-            /> : []
-        }
+
+            { showBookImage === false && 
+              showBookState === true && 
+              showFavBooks === false &&
+              showSearchForm === false ? 
+                <Details 
+                  showBook={showBook} 
+                  favoriteSubmit={this.favoriteSubmit} 
+                  backToSearch={this.backToSearch} 
+                  memberId={this.state.memberId}
+                /> : [] 
+            }
+            
+            {showBookImage === false ? [] : <SearchBookImage />}         
+          
+          { showBookImage === false && 
+            showBookState === false && 
+            showFavBooks === true &&
+            showSearchForm === false ? 
+              <Favorite
+                memberId={this.state.memberId}
+                backToSearch={this.backToSearch} 
+              /> : []
+          }
+          </Container>
+    
+       
 
       </div>
       

@@ -128,7 +128,8 @@ ul.search-results img {
 .text-center {
   margin-top: 25px;
   margin-bottom: 45px;
-  margin-left: -195px;
+  margin-left: 345px;
+  text-align: center;
 }
 
 .col-md-4, .col-md-3 {

@@ -20,7 +20,7 @@ function Details(props) {
             { props.memberId === null || props.memberId === undefined ? "Sign In to Add Book to Favorite" :
               <>
                 <button  
-                  id={favBook.etag} type="submit" onClick={() => props.favoriteSubmit(favBook.id)} className="btn btn-success">Add to Favorite
+                  id={favBook.etag} type="submit" onClick={() => props.favoriteSubmit(favBook.etag)} className="btn btn-success">Add to Favorite
                 </button>    
               </>
             }
