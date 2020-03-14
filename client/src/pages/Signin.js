@@ -4,6 +4,7 @@ import "./style.css";
 import API from "../utils/API";
 import { Button } from 'reactstrap';
 import Search from "./Search";
+import Navbar from "../components/Navbar";
 
 
 
@@ -101,8 +102,8 @@ class Signin extends Component {
           userName: data[0].memberId,          
           membername: data[0].memberName,
         })
-        console.log("THIS IS MEMBERID", this.state.userName)
-        // this.props.saveMemberID(data[0].memberId)
+        console.log("THIS IS MEMBERID", this.state.userName) 
+        console.log("THIS IS MEMBERNAME", this.state.membername)      
         
         
       }
@@ -116,53 +117,57 @@ class Signin extends Component {
     return (
       <div>
         { this.state.userName !== null ? [] :
-          <Container style={{ minHeight: "100%", width: "100%", marginTop: 80 }}>
-            <div className="card card-body">
-              {/* <div id="message"></div> */}
-              <div id ="message">{this.message}</div>
-              <h5>Sign In</h5>
-              <form className="form-groups">          
-                <div className="form-group">
-                  <label id="username"></label>
-                  <input 
-                    value={this.memberemail}
-                    onChange={this.handleInputChange}
-                    name="memberemail"
-                    type="text"
-                    className="form-control"  
-                    placeholder="Enter Your Email"
-                    id="memberemail"
-                    />
+          <Container style={{ marginTop: 150, marginLeft: 750}}>
+            <div>
+              <div className="card card-body">              
+                <div id ="message">{this.message}</div>
+                <h5>Sign In</h5>
+                <form className="form-groups">          
+                  <div className="form-group">
+                    <label id="username"></label>
+                    <input 
+                      value={this.memberemail}
+                      onChange={this.handleInputChange}
+                      name="memberemail"
+                      type="text"
+                      className="form-control"  
+                      placeholder="Enter Your Email"
+                      id="memberemail"
+                      />
+                  </div>
+                  <div className="form-group">
+                    <label id="password"></label>
+                    <input 
+                      value={this.memberpassword}
+                      onChange={this.handleInputChange}
+                      name="memberpassword"
+                      type="password" 
+                      className="form-control" 
+                      placeholder="Enter User Password"
+                      id="memberpassword" 
+                      />
+                  </div>
+                  
+                </form>            
+                <div className="getstarted">
+                  <span>
+                    <Button 
+                      type="submit" onClick={this.signInSubmit} color="info" size="sm">Sign In
+                    </Button>{" "}
+                            
+                    <p>No Account? <a href="/Getstarted">Create Account</a></p>
+                    <p><a href="/Getstarted">Forget Email/Password?</a></p>
+                  </span>
                 </div>
-                <div className="form-group">
-                  <label id="password"></label>
-                  <input 
-                    value={this.memberpassword}
-                    onChange={this.handleInputChange}
-                    name="memberpassword"
-                    type="password" 
-                    className="form-control" 
-                    placeholder="Enter User Password"
-                    id="memberpassword" 
-                    />
-                </div>
-                
-              </form>            
-              <div className="getstarted">
-            <span>
-              <Button 
-                type="submit" onClick={this.signInSubmit} color="info" size="sm">Sign In
-              </Button>{" "}
-                      
-              <p>No Account? <a href="/Getstarted">Create Account</a></p>
-              <p><a href="/Getstarted">Forget Email/Password?</a></p>
-            </span>
-          </div>
+              </div>
             </div>
           </Container>
-        }            
+        }
+        {this.state.userName === null || this.state.userName === undefined ? [] : <Navbar          
+            userName={this.state.userName} membername={this.state.membername}       
+          />}            
         {this.state.userName === null || this.state.userName === undefined ? [] : <Search          
-            userName={this.state.userName}         
+            userName={this.state.userName} 
           />}
       </div>
     );

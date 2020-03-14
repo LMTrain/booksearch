@@ -5,7 +5,7 @@ import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
 import Details from "../components/Details";
 import SearchBookImage from "../components/SearchBookImage";
-import { Row, Col } from 'reactstrap';
+// import { Row, Col } from 'reactstrap';
 import Favorite from "./Favorite";
 import { Redirect } from "react-router-dom";
 
@@ -40,7 +40,14 @@ class Search extends Component {
     API.search(query)
       .then(res => this.setState({ books: res.data.items }))         
       .catch(err => console.log(err));
-  }  
+  };
+  
+  signOut = () => {
+    this.setState({ redirect: true})
+    if (this.state.redirect) {       
+      return <Redirect to='/' />
+    }
+  };
 
   handleInputChange = event => {
     const name = event.target.name;
@@ -71,9 +78,7 @@ class Search extends Component {
                     showFavBooks: false,
                     showSearchForm: true,
                   });
-    // if (this.state.redirect === true) {      
-    //   return <Redirect to='/Favorite' memberId={this.state.memberId}/>
-    // }
+    
     this.showFavoriteBooks();
   };
 
@@ -166,14 +171,9 @@ class Search extends Component {
                     showSearchForm: true, 
                     showBookState: false
                   });
-  }
+  };
 
-  signOut = () => {
-    this.setState({ redirect: true})
-    if (this.state.redirect) {       
-      return <Redirect to='/' />
-    }
-  }
+  
  
   render() {   
     const {showBookState, showBook, showBookImage, showFavBooks, showSearchForm} = this.state
@@ -182,15 +182,7 @@ class Search extends Component {
       <div>
         
           <Container style={{ minHeight: "100%", width: "100%" }}>
-          {/* <Row>
-          <Col md="5">
-            <span>
-              <button type="submit" onClick={() => this.backToSearch()} className="btn btn-success">Add More Books</button>
-              <button type="submit" onClick={() => this.signOut()} className="btn btn-success">Sign Out</button>
-            </span>
-          </Col> 
-          </Row>           */}
-            
+                      
             { showBookImage === true && 
               showBookState === false && 
               showFavBooks === false &&
@@ -256,6 +248,7 @@ class Search extends Component {
                 memberId={this.state.memberId}
                 backToSearch={this.backToSearch} 
                 renderRedirect={this.renderRedirect}
+                handleDetailsSubmit={this.handleDetailsSubmit}
                 signOut={this.signOut}
               /> : []
           }

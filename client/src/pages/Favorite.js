@@ -2,13 +2,10 @@ import React, { Component } from "react";
 import "./style.css";
 import API from "../utils/API";
 import Container from "../components/Container";
-// import NoteForm from "../components/NoteForm";
-// import Row from "../components/Row";
-// import Col from "../components/Col";
 import { Card, CardHeader, CardBody, Button, Row, Col} from 'reactstrap';
+import FavDetails from "../components/FavDetails";
 import { Link } from "react-router-dom";
-// import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-// import moment from 'moment';
+
 
 
 
@@ -21,7 +18,12 @@ class Favorite extends Component {
     userBooks: [],
     favBooks: [],
     userfavBooksCount: 0,
+    showBook: [],
+    detailsFavBook: [],
+    showBookState: false,    
+    showFavBooks: true,
     note: "",
+    favId: "",
     memberId: this.props.memberId,
     isOpen: false   
   };
@@ -36,25 +38,24 @@ class Favorite extends Component {
       .then(res => {        
         this.setState({ book: res.data, id: "", title: "", authors: "", link: "", thumbnail: "", description: "", publisheddate: "", note: "",})
         
-        allUsersBooks = [...res.data]
-        console.log("THIS IS ALLUSERSBOOKS", allUsersBooks)
-        this.setState({favBooks: [allUsersBooks]})
-        console.log("THIS IS STATE FAV BOOKS", this.state.favBooks)
-        console.log("THIS IS MID", mId)
+        allUsersBooks = [...res.data]        
+        this.setState({favBooks: [allUsersBooks]})        
+        // console.log("THIS IS MID", mId)
         let booksFind = [];
         var userFavBooks = 0;
         for (let i = 0;  i < allUsersBooks.length; i++) {      
           if (allUsersBooks[i].bookmember === mId) {
               booksFind.push(allUsersBooks[i])
               userFavBooks = userFavBooks + 1;            
-              this.setState({userBooks:booksFind, userfavBooksCount: userFavBooks})
+              this.setState({userBooks:booksFind, 
+                            userfavBooksCount: userFavBooks,
+                            showBookState: false,
+                            showFavBooks: true
+                          })
             }
-          }          
-          console.log("THIS IS USERSBOOKS", this.state.userBooks) 
-        
+          } 
       }
-      )      
-      // console.log("THIS IS FAVBOOKS", this.state.book)
+      )
       .catch(err => console.log(err));
   };
 
@@ -65,20 +66,48 @@ class Favorite extends Component {
     console.log(value)
     this.setState({
       [note]: value
-    });
-   
+    });   
   };
+
+  // handleInputChange = event => {
+  //   const name = event.target.name;
+  //   const value = event.target.value;
+  //   this.setState({
+  //     [name]: value
+  //   });
+  // };
 
   handleFormSubmit = event => {   
     event.preventDefault();
+    console.log(event)
+    this.setState({note: this.state.note});
+    this.addNote()
   };
+
+  favDetailsSubmit = (id) => {  
+    // Find the id in the state
+    const favbook = this.state.userBooks.find((book) => book._id === id);
+    // console.log("THIS IS FAVDATAIL", favbook) 
+    this.setState({showBook: [favbook], 
+                  detailsFavBook: [favbook],
+                  favId: id, 
+                  showBookState: true,
+                  showFavBooks: false,
+                  redirect: true
+                })
+          
+  };
+
+  backToFav = () => {   
+    this.loadBooks();
+  }
 
   addNote = (id) => {
     console.log(this.state.note)
-    console.log("THIS IS ID", id)
+    console.log(this.state.favId)  
     let bookNote = this.state.note
     API.updateBook({
-      _id: id,
+      _id: this.state.favId,
       note: bookNote      
     })
       .then(res => {console.log(res)})
@@ -103,7 +132,7 @@ class Favorite extends Component {
   
 
   render() { 
-    const {userfavBooksCount} = this.state;
+    const {userfavBooksCount, showBookState, showBook, showFavBooks, favId} = this.state;
     return (
       <div>
        
@@ -116,90 +145,79 @@ class Favorite extends Component {
           <Container> 
             <Row>
               <Col className="fav-menu-bar">
-    <Button color="info" size="sm" onClick={this.props.renderRedirect} ><b>{userfavBooksCount}</b>{" "}Favorites</Button>{" "}    
-              <Button type="submit" onClick={() => this.props.backToSearch()} color="info" size="sm">Add More Books</Button>{" "}
-              <Link to="/"><Button type="submit" color="info" size="sm">Sign Out</Button></Link>
+                <Button type="submit" onClick={this.props.renderRedirect} color="info" size="sm"><b>{userfavBooksCount}</b>{" "}Favorites</Button>{" "}    
+                <Button type="submit" onClick={() => this.props.backToSearch()} color="info" size="sm">Add More Books</Button>{" "}
+                <Link to="/"><Button type="submit" color="info" size="sm">Sign Out</Button></Link>
               </Col>
-            </Row>       
-              {this.state.userBooks.length ? (
-                <div className="book-row-display">
-                  {this.state.userBooks.map(book => (
-                    <Col key={book._id} md="3">                  
-                      {/* <span onClick={() => this.loadFavBooks(book._id)}> */}
-                        <Card className="book-card">                    
-                          <CardHeader className="book-card-header">
-                            <Row>
-                              <Col md="10">
-                                <b>Title :</b> {book.title}
-                              </Col>
-                              <Col md="2">
+            </Row>
+            { 
+              showBookState === true &&
+              showFavBooks !== true ? 
+                <FavDetails
+                  note={this.state.note}
+                  handleFormSubmit={this.handleFormSubmit}
+                  handleInputChange={this.handleInputChange}  
+                  showBook={showBook}
+                  favId={favId} 
+                  favoriteSubmit={this.favoriteSubmit} 
+                  backToFav={this.backToFav}
+                  addNote={this.addNote} 
+                  memberId={this.state.memberId}
+                /> : [] 
+            }       
+            {showBookState === false &&
+             showFavBooks === true &&
+             this.state.userBooks.length ? (
+              <div className="book-row-display">
+                {this.state.userBooks.map(book => (
+                  <Col key={book._id} md="3">                  
+                    {/* <span onClick={() => this.loadFavBooks(book._id)}> */}
+                      <Card className="book-card">                    
+                        <CardHeader className="book-card-header">
+                          <Row>
+                            <Col md="10">
+                              <b>Title :</b> {book.title}
+                            </Col>
+                            <Col md="2">
                               <span className="delete-button">
-                            <span onClick={() => this.deleteBook(book._id)}><b>X</b></span>
-                              {/* <Button type="submit" onClick={() => this.deleteBook(book._id)} color="danger" size="sm">X</Button> */}
-                            </span>
-                              </Col>
-                            </Row>
-                            
-                            
-                          </CardHeader>
-                          <div className="img-container">
-                          <img
-                            alt={book.title} width="130" height="160"
-                            src={book.thumbnail}
+                                <span onClick={() => this.deleteBook(book._id)}><b>X</b></span>                              
+                              </span>
+                            </Col>
+                          </Row>                            
+                        </CardHeader>
+                            <div className="img-container">
+                            <img
+                              alt={book.title} width="130" height="160"
+                              src={book.thumbnail}
                           />
-                          </div>
-                          <CardBody className="content"> 
-                            <p><b>Authors :</b>{" "}{book.authors}</p>
-                            <p><b>Published Date :</b> {book.publisheddate}</p>
-                            <p>{book.bookmember}</p>                        
-                            <span>
-                            {/* <form className="note">
-                              <div className="form-group">
-                                <label htmlFor="note"></label>
-                                <input
-                                  value={this.state.note}
-                                  onChange={this.state.handleInputChange}
-                                  name="note" 
-                                  type="text" 
-                                  className="form-control" 
-                                  placeholder="Add a note " 
-                                  id="note"
-                                />        
-                                <button                                
-                                  type="submit" 
-                                  onClick={() => this.handleNoteSubmit()} 
-                                  className="btn btn-success">
-                                  Save
-                                </button>
-                              </div>      
-                            </form> */}
-                            {/* <NoteForm                            
-                              note={this.state.note}
-                              handleFormSubmit={this.handleFormSubmit}
-                              handleInputChange={this.handleInputChange}            
-                            /> */}
-                          </span>
-
-                          </CardBody>
-                          <span>                         
-                            {/* <Button type="submit" onClick={() => this.deleteBook(book._id)} color="danger" size="sm">Delete</Button> */}
-                            {/* <Button type="submit" onClick={() => this.editNote(book._id)} color="info" size="sm">Add Note</Button> */}
-
-                          </span>                                       
-                        </Card>                                          
-                      {/* </span>                        */}
-                    </Col>
-                  ))}
+                        </div>
+                        <CardBody className="content"> 
+                          <p><b>Authors :</b>{" "}{book.authors}</p>
+                          <p><b>Published Date :</b> {book.publisheddate}</p>
+                          <button id={book._id}type="submit" onClick={() => this.favDetailsSubmit(book._id)} className="btn btn-success">Detail</button>                         
+                        </CardBody>                                                                
+                      </Card>       
+                  </Col>
+                ))
+              }
+            </div>
+            ) 
+              : showBookState === false &&
+                showFavBooks === true &&
+                this.state.userfavBooksCount === 0 ?
+                (<div>
+                  <h5>No book(s) in your Favorites</h5>
+                  <Button type="submit" onClick={() => this.props.backToSearch()} color="info" size="sm">Add More Books</Button>{" "}
                 </div>
-                    ) : (
-                      <h5>Loading...</h5>
-                    )}
+              ) : []
+            
+          }
           </Container>
         </Row>      
       </div>
-      );
-    }
+    );
   }
+}
         
                
 

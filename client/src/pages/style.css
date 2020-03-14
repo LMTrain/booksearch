@@ -18,6 +18,18 @@ ul.search-results img {
   text-align: left;
   border-radius: .95rem;
   margin-bottom: 15px;
+  margin-top: 10px;    
+}
+
+.card card-body {
+  border-radius: 2px;
+  height: 400px;  
+  position: relative;
+  width: 300px;
+  box-shadow: 0 5px 8px #6f6666, 0 5px 8px #6f6666;
+  text-align: left;
+  border-radius: .95rem;
+  margin-bottom: 15px;
 }
 
 .img-container { 
@@ -38,12 +50,12 @@ ul.search-results img {
   text-align: center;
 }
 
-.list-group-item {
+/* .list-group-item {
   position: relative;  
   background-color: transparent;
   width: 950px;
   border-radius: .95rem; 
-}
+} */
 
 .book-card {
   background-image: linear-gradient(45deg, #4e54c8 0%, #8f94fb 100%);
@@ -109,16 +121,19 @@ ul.search-results img {
 .fav-menu-bar {
   width: 500px;
   padding: 5px;
-  margin-left: 630px;
+  margin-left: 600px;
 }
 
 .container {
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
+  width: 100%; 
+  padding-left: auto;
   margin-right: auto;
   margin-left: auto;
   margin-bottom: 70px;
+}
+
+.container-content {
+  margin-top: 50px;
 }
 
 .delete-button { 

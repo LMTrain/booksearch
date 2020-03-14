@@ -15,7 +15,7 @@ form.search {
 .menu-bar {
   width: 500px;
   padding: 4px;
-  margin-right: 150px;
+  margin-right: 80px;
 }
 
 form.search button[type="submit"] {
@@ -29,7 +29,7 @@ form.search button[type="submit"] {
 
 .form-control {
   display: block;
-  width: 40%;
+  width: 60%;
   height: 38px;
   text-align: center;    
   padding: .375rem .75rem;

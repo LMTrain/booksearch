@@ -3,24 +3,25 @@ import Hero from "../components/Hero";
 import Container from "../components/Container";
 import Row from "../components/Row";
 import Col from "../components/Col";
+import Card from "../components/Card";
+
 
 function About() {
   return (
     <div>
-      <Hero backgroundImage="https://lmtrain.github.io/lm-images/assets/images/books6.jpg">
-        <h1>LM Books Search</h1>
-        <h2>A Place To Find All Your Books</h2>
-      </Hero>
       <Container style={{ marginTop: 10 }}>
+      <Hero />
+      <Card>
         <Row>
           <Col size="md-12">
+            
             <h3>Welcome!</h3>
           </Col>
         </Row>
         <Row>
           <Col size="md-12">
             <p>
-            LM Books Search, uses Google API's for book searching. It searches the full text of books and magazines that Google has scanned, converted to text using optical character recognition (OCR), and stored its digital database. Books are provided either by publishers and authors through the Google Books Partner Program, or by Google's library partners through the Library Project. Additionally, Google has partnered with a number of magazine publishers to digitize their archives.
+            LM Books Search, uses Google API's for book searching. It searches the full text of books and magazines that Google has scanned, converted to text using optical character recognition (OCR), and stored its digital database. Books are provaltTexted either by publishers and authors through the Google Books Partner Program, or by Google's library partners through the Library Project. Additionally, Google has partnered with a number of magazine publishers to digitize their archives.
             </p>
             <p>
             
@@ -33,6 +34,7 @@ function About() {
             </p>
           </Col>
         </Row>
+      </Card>
       </Container>
     </div>
   );

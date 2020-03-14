@@ -117,7 +117,7 @@ class GetStarted extends Component {
     return (
       <div>
         {this.renderRedirect()}
-        <Container style={{ marginTop: 80 }}>        
+        <Container style={{ marginTop: 150, marginLeft: 750 }}>        
 
           <UserForm
             id="message"
