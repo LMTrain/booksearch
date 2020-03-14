@@ -101,10 +101,7 @@ class Signin extends Component {
           redirect: true,
           userName: data[0].memberId,          
           membername: data[0].memberName,
-        })
-        console.log("THIS IS MEMBERID", this.state.userName) 
-        console.log("THIS IS MEMBERNAME", this.state.membername)      
-        
+        })       
         
       }
      
