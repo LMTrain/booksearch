@@ -4,9 +4,7 @@ import "./style.css";
 
 
 
-function FavDetails(props) { 
-  // console.log("THIS IS DETAILS PROPS", props)
-  console.log("THIS IS FAV ID PROPS", props.favId);  
+function FavDetails(props) {  
  
   return (
    

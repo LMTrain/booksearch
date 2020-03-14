@@ -27,7 +27,7 @@ export default {
       const noted = String(idd.note);
       console.log(noted)
       console.log(id)     
-    return axios.put("/api/books/" + id, noted);
+    return axios.put("/api/books/" + id, [noted]);
   },
   // Deletes the book with the given id
   deleteBook: function(id) {
