@@ -4,8 +4,8 @@ import Container from "../components/Container";
 import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
 import Details from "../components/Details";
+// import BookDetailModal from "../components/Modals";
 import SearchBookImage from "../components/SearchBookImage";
-// import { Row, Col } from 'reactstrap';
 import Favorite from "./Favorite";
 import { Redirect } from "react-router-dom";
 
