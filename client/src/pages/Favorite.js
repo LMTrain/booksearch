@@ -61,9 +61,7 @@ class Favorite extends Component {
 
   handleInputChange = event => {
     const note = event.target.name;
-    const value = event.target.value;
-    console.log(note)
-    console.log(value)
+    const value = event.target.value;  
     this.setState({
       [note]: value
     });   
@@ -138,7 +136,7 @@ class Favorite extends Component {
        
           <Row>
             <Col ms="12">
-              <h1 className="text-center">Favorite Books</h1> 
+              <h3 className="text-center">Favorite Books</h3> 
             </Col>
           </Row>
         <Row> 

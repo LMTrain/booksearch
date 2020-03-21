@@ -4,8 +4,7 @@ import { Button} from 'reactstrap';
 
 
 
-function Details(props) { 
-  console.log("THIS IS DETAILS PROPS", props)
+function Details(props) {  
   return (
    
     <div>

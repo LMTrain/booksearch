@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import { Card, CardHeader, CardBody, Row, Col, Button} from 'reactstrap';
+import { Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
 
 function truncateString(str, num) {    
   if (str.length > num && num > 3) {
