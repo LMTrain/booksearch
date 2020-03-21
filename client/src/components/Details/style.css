@@ -10,6 +10,7 @@ ul.search-results img {
     background-color: bisque;    
     box-shadow: 0 5px 8px #6f6666, 0 5px 8px #6f6666;
     text-align: left;
+    font-size: larger;
     border-radius: 92px;
     margin-bottom: 93px;
 }

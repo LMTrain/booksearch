@@ -15,7 +15,7 @@ function About() {
         <Row>
           <Col size="md-12">
             
-            <h3>Welcome!</h3>
+            <h1>Welcome!</h1>
           </Col>
         </Row>
         <Row>

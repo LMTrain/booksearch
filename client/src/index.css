@@ -10,7 +10,7 @@ div[data-reactroot] {
   height: 100%;
   padding: 0;
   margin: 0;
-  font-size: 18px;
+  font-size: 12px;
   background-image: url(../src/images/home-bg.jpg);
   /* background-size: cover; */
   

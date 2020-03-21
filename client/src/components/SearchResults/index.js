@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import { Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
+import { Card, CardHeader, CardBody, Row, Col, Button} from 'reactstrap';
 
 function truncateString(str, num) {    
   if (str.length > num && num > 3) {
@@ -26,7 +26,7 @@ function SearchResults(props) {
                     <CardHeader className="book-card-header"><b>Title :</b> {result.volumeInfo.title = truncateString(result.volumeInfo.title, 40)} </CardHeader>
                     <div className="img-container">
                     <img 
-                      alt={result.volumeInfo.title} width="130" height="160" 
+                      alt={result.volumeInfo.title} width="40" height="80" 
                       src={result.volumeInfo.imageLinks == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : result.volumeInfo.imageLinks.thumbnail} 
                       />
                     </div>
@@ -36,15 +36,15 @@ function SearchResults(props) {
                       <b>Published Date :</b> {result.volumeInfo.publishedDate}
                     </CardBody>
                   
-                  <span>
-                    <button id={result.etag}type="submit" onClick={() => props.handleDetailsSubmit(result.etag)} className="btn btn-success">Detail</button>  
+                  <span className="card-button">
+                    <p onClick={() => props.handleDetailsSubmit(result.etag)}>Details</p>  
                    
                     {/* <button id={result.etag} type="submit" onClick={() => props.favoriteSubmit(result.id)} className="btn btn-success">Add to Favorite</button> */}
                     { props.memberId === null || props.memberId === undefined ? [] :
                       <>
-                        <button  
-                          id={result.etag} type="submit" onClick={() => props.favoriteSubmit(result.etag)} className="btn btn-success">Add to Favorite
-                        </button>    
+                        <p  
+                          id={result.etag} type="submit" onClick={() => props.favoriteSubmit(result.etag)}>Add to Favorite
+                        </p>    
                       </>
                     }
                   </span>
