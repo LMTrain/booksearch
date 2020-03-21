@@ -149,9 +149,9 @@ ul.search-results img {
 
 .text-center {
   margin-top: 25px;
-  margin-bottom: 45px;
-  /* margin-left: 345px; */
+  margin-bottom: 45px; 
   text-align: center;
+  color: rgb(32, 32, 32);
 }
 
 .col-md-4, .col-md-3 {

@@ -10,6 +10,7 @@ ul.search-results img {
     background-color: bisque;    
     box-shadow: 0 5px 8px #6f6666, 0 5px 8px #6f6666;
     text-align: left;
+    font-size: larger;
     border-radius: 92px;
     margin-bottom: 93px;
 }
@@ -25,17 +26,13 @@ ul.search-results img {
   }
 }
 
-/* .col-md-2, .col-md-3 {
-  position: relative;
-  width: 100%;
-  min-height: 1px;
-  margin-right: 25px;
-  margin-left: -90px;
-  margin-top: 50px;
-  padding-left: 0px;
-  padding-right: 0px;
-  padding-top: -1px;
-} */
+.col-md-7 {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 58.333333%;
+  flex: 0 0 58.333333%;
+  max-width: 58.333333%;
+  margin-top: -40px;
+}
 
 .note-form-group {
   display: flex;

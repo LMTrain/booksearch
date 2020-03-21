@@ -136,12 +136,12 @@ class Favorite extends Component {
     return (
       <div>
        
-        <Row> 
           <Row>
-            <Col>
-              <h3 className="text-center">My Favorite Books</h3> 
+            <Col ms="12">
+              <h1 className="text-center">Favorite Books</h1> 
             </Col>
           </Row>
+        <Row> 
           <Container> 
             <Row>
               <Col className="fav-menu-bar">

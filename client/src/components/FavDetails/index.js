@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col} from 'reactstrap';
+import { Row, Col, Button} from 'reactstrap';
 import "./style.css";
 
 
@@ -17,7 +17,7 @@ function FavDetails(props) {
               <img alt={favBook.title} width="200" height="220" className="img-fluid" src={favBook.thumbnail} /><span></span> 
             </Col>
             <Col md="3">
-              <span style={{ marginLeft: 80 }}><button type="submit" onClick={() => props.backToFav()} className="btn btn-success">Back To Favorites</button>{" "}</span>
+              <span style={{ marginLeft: 80 }}><Button type="submit" onClick={() => props.backToFav()} color="info" size="sm">Back To Favorites</Button>{" "}</span>
             </Col>
             <Col md="7">
               <form className="note">          
@@ -33,12 +33,7 @@ function FavDetails(props) {
                     id="note"
                   />
                   <span>
-                    <button 
-                      type="submit" 
-                      onClick={props.handleFormSubmit} 
-                      className="btn btn-success">
-                      <span> Save Note</span>
-                    </button>
+                    <Button type="submit" onClick={props.handleFormSubmit} color="info" size="sm"><span> Save Note</span></Button>
                   </span>
                 </div>          
               </form>

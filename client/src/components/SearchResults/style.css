@@ -54,6 +54,7 @@ ul.search-results img {
   margin-left: 20px;
   margin-top: 8px;
   font-weight: bold;
+  display: flex;
 }
 
 .card-button :hover {
