@@ -63,6 +63,7 @@ ul.search-results img {
   color: white;
   transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s;
   margin-bottom: 20px;
+  margin-right: 350px;
   padding-right: 5px;
   
 }
@@ -121,7 +122,7 @@ ul.search-results img {
 .fav-menu-bar {
   width: 500px;
   padding: 5px;
-  margin-left: 600px;
+  margin-left: 780px;
 }
 
 .container {
@@ -132,6 +133,22 @@ ul.search-results img {
   margin-bottom: 70px;
   margin-top: 50px;
 }
+
+.fav-card-button {
+  font-size: 14px;
+  padding:.5px;
+  margin-left: 80px;
+  /* margin-top: 8px; */
+  margin-bottom: -20px;
+  font-weight: bold;
+  display: flex;
+}
+
+.fav-card-button :hover {
+  color: orangered;
+  cursor: pointer;
+}
+
 
 .container-content {
   margin-top: 50px;

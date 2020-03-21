@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import { Button} from 'reactstrap';
 
 
 
@@ -13,15 +14,15 @@ function Details(props) {
       {props.showBook.map(favBook => (          
         <li key={favBook.id} className="list-group-item">
           <img alt={favBook.volumeInfo.title} width="200" height="220" className="img-fluid" src={favBook.volumeInfo.imageLinks == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : favBook.volumeInfo.imageLinks.thumbnail} /><span></span>
-          <span style={{ marginLeft: 80 }}><button type="submit" onClick={() => props.backToSearch()} className="btn btn-success">Back To Search</button>{" "}</span> 
+          <span style={{ marginLeft: 80 }}><Button type="submit" onClick={() => props.backToSearch()} color="info" size="sm">Back To Search</Button>{" "}</span> 
           <span> 
             {/* <button id={favBook.etag} type="submit" onClick={() => props.favoriteSubmit(favBook.id)} className="btn btn-success">Add to Favorite
             </button> */}
             { props.memberId === null || props.memberId === undefined ? "Sign In to Add Book to Favorite" :
               <>
-                <button  
-                  id={favBook.etag} type="submit" onClick={() => props.favoriteSubmit(favBook.etag)} className="btn btn-success">Add to Favorite
-                </button>    
+                <Button  
+                  id={favBook.etag} type="submit" onClick={() => props.favoriteSubmit(favBook.etag)} color="info" size="sm">Add to Favorite
+                </Button>    
               </>
             }
           </span>       

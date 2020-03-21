@@ -145,8 +145,8 @@ class Favorite extends Component {
           <Container> 
             <Row>
               <Col className="fav-menu-bar">
-                <Button type="submit" onClick={this.props.renderRedirect} color="info" size="sm"><b>{userfavBooksCount}</b>{" "}Favorites</Button>{" "}    
-                <Button type="submit" onClick={() => this.props.backToSearch()} color="info" size="sm">Add More Books</Button>{" "}
+                <Button onClick={this.props.renderRedirect} color="info" size="sm"><b>{userfavBooksCount}</b>{" "}Favorites</Button>{" "}    
+                <Button onClick={() => this.props.backToSearch()} color="info" size="sm">Add More Books</Button>{" "}
                 <Link to="/"><Button type="submit" color="info" size="sm">Sign Out</Button></Link>
               </Col>
             </Row>
@@ -187,14 +187,16 @@ class Favorite extends Component {
                         </CardHeader>
                             <div className="img-container">
                             <img
-                              alt={book.title} width="130" height="160"
+                              alt={book.title} width="40" height="80"
                               src={book.thumbnail}
                           />
                         </div>
                         <CardBody className="content"> 
                           <p><b>Authors :</b>{" "}{book.authors}</p>
                           <p><b>Published Date :</b> {book.publisheddate}</p>
-                          <button id={book._id}type="submit" onClick={() => this.favDetailsSubmit(book._id)} className="btn btn-success">Detail</button>                         
+                          <div className="fav-card-button">
+                            <p onClick={() => this.favDetailsSubmit(book._id)}>Details</p>
+                          </div>
                         </CardBody>                                                                
                       </Card>       
                   </Col>
