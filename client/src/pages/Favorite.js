@@ -36,7 +36,7 @@ class Favorite extends Component {
   loadBooks = () => {
     API.getBooks()
       .then(res => {        
-        this.setState({ book: res.data, id: "", title: "", authors: "", link: "", thumbnail: "", description: "", publisheddate: "", note: "",})
+        this.setState({ book: res.data})
         
         allUsersBooks = [...res.data]        
         this.setState({favBooks: [allUsersBooks]})        

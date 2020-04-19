@@ -9,12 +9,14 @@ module.exports = {
       .then(dbModel => res.json(dbModel))      
       .catch(err => res.status(422).json(err));
   },
+  
   findById: function(req, res) {
     db.Book
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+
   create: function(req, res) {
     console.log(req.body.title),
     db.Book
@@ -22,14 +24,15 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  update: function(req, res) {
-    
+
+  update: function(req, res) {    
     // const bookNote = req.body    
     db.Book      
       .findOneAndUpdate({ _id: req.params.id }, {$set: {note: req.body[0]}}, req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+
   remove: function(req, res) {    
     db.Book
       .findById({ _id: req.params.id })
