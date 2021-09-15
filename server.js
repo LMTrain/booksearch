@@ -34,6 +34,8 @@ app.use(routes);
 //     console.log("MongoDB connected");
 // })
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks");
+console.log("MongoDB connected");
+console.log(process.env.MONGODB_URI)
 
 
 
@@ -41,4 +43,6 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks");
 // Start the API server
 app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+  console.log("MongoDB connected");
+  console.log(process.env.MONGODB_URI)
 });
