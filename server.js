@@ -8,7 +8,7 @@ require('dotenv').config();
 const app = express();
 
 const PORT = process.env.PORT || 3001;
-// const server = require('http').createServer(app);
+
 
 
 
@@ -26,13 +26,6 @@ app.use(routes);
 
 // Connect to the Mongo DB
 
-// const uri = process.env.MONGODB_URI || "mongodb://localhost/googlebooks";
-// mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true}
-// );
-// const connection = mongoose.connection;
-// connection.once("open", () => {
-//     console.log("MongoDB connected");
-// })
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks");
 console.log("MongoDB connected");
 console.log(process.env.MONGODB_URI)
