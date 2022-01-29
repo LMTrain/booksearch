@@ -28,7 +28,7 @@ module.exports = {
           switch(bcrypt.compareSync(req.body.password, hash)){
             case true:
                 return res.json({data,
-                    // "data": "You can't create data",
+                    // "data": "That means You can't create data",
                     "error": "YOU ARE IN"
                     })
             case false:
