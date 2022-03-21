@@ -15,6 +15,7 @@ function Details(props) {
           <img alt={favBook.volumeInfo.title} width="200" height="220" className="img-fluid" src={favBook.volumeInfo.imageLinks == null ? 'https://lmtrain.github.io/lm-images/assets/images/books5.jpg' : favBook.volumeInfo.imageLinks.thumbnail} /><span></span>
           <span style={{ marginLeft: 80 }}><Button type="submit" onClick={() => props.backToSearch()} color="info" size="sm">Back To Search</Button>{" "}</span> 
           <span> 
+            //COMMENTED OUT
             {/* <button id={favBook.etag} type="submit" onClick={() => props.favoriteSubmit(favBook.id)} className="btn btn-success">Add to Favorite
             </button> */}
             { props.memberId === null || props.memberId === undefined ? "Sign In to Add Book to Favorite" :
